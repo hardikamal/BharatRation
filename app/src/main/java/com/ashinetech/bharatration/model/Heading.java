@@ -1,4 +1,4 @@
-package model;
+package com.ashinetech.bharatration.model;
 
 import java.util.ArrayList;
 

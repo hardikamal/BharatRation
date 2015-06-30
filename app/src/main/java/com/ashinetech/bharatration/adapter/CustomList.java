@@ -1,7 +1,6 @@
-package adapter;
+package com.ashinetech.bharatration.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,8 @@ import android.widget.TextView;
 import com.ashinetech.bharatration.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import model.InfiniteModel;
+import com.ashinetech.bharatration.model.InfiniteModel;
 
 /**
  * Created by ragavendran on 30-06-2015.

@@ -1,4 +1,4 @@
-package adapter;
+package com.ashinetech.bharatration.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,7 +13,7 @@ import com.ashinetech.bharatration.R;
 
 import java.util.ArrayList;
 
-import model.Heading;
+import com.ashinetech.bharatration.model.Heading;
 
 /**
  * Created by Vignesh on 30-06-2015.

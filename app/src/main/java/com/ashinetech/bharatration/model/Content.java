@@ -1,4 +1,4 @@
-package model;
+package com.ashinetech.bharatration.model;
 
 /**
  * Created by Vignesh on 30-06-2015.

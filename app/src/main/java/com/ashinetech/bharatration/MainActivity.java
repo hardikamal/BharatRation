@@ -10,18 +10,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,13 +26,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import adapter.CustomList;
-import adapter.MyList;
-import model.Content;
-import model.Heading;
-import model.InfiniteModel;
-import utils.AppConstants;
-import utils.RestfulService;
+import com.ashinetech.bharatration.adapter.MyList;
+import com.ashinetech.bharatration.model.Content;
+import com.ashinetech.bharatration.model.Heading;
+import com.ashinetech.bharatration.model.InfiniteModel;
+import com.ashinetech.bharatration.constants.URLConstants;
+import com.ashinetech.bharatration.service.RestfulService;
 
 
 public class MainActivity extends ActionBarActivity
@@ -282,7 +277,7 @@ public class MainActivity extends ActionBarActivity
 
         protected String doInBackground(String... arg0)
         {
-            mdata = RestfulService.source(AppConstants.URLConstants.essentials);
+            mdata = RestfulService.source(URLConstants.SERVICE_URL);
             return mdata;
         }
 
