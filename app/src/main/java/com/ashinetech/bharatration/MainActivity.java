@@ -1,6 +1,10 @@
 package com.ashinetech.bharatration;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -16,7 +20,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import adapter.CustomList;
+import adapter.MyList;
+import model.Content;
+import model.Heading;
+import model.InfiniteModel;
+import utils.AppConstants;
+import utils.RestfulService;
 
 
 public class MainActivity extends ActionBarActivity
@@ -26,16 +46,55 @@ public class MainActivity extends ActionBarActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
     private NavigationDrawerFragment mNavigationDrawerFragment;
+    AlertDialog alertDialogStores;
+    private HashMap<String, ArrayList<Content>> stringContentHashMap = new HashMap<>();
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
     private CharSequence mTitle;
+    Context context;
+    ProgressDialog progressDialog;
+    String mdata;
+    ArrayList<InfiniteModel> modelClasses = new ArrayList<InfiniteModel>();
+    ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /* Ragav Code Starts */
+        if (android.os.Build.VERSION.SDK_INT > 9)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+        }
+
+       // new GetData().execute();
+       // CustomList customList = new CustomList(MainActivity.this,modelClasses);
+       // list  = (ListView) findViewById(R.id.list);
+       // list.setAdapter(customList);
+
+        /* Ragav Code Ends */
+
+
+        /* Vignesh Code Starts */
+        View.OnClickListener handler = new View.OnClickListener(){
+
+            public void onClick(View v) {
+
+                switch (v.getId()) {
+                    case R.id.buttonShowPopUp:
+                        showPopUp();
+                        break;
+
+                }
+
+            }
+        };
+        findViewById(R.id.buttonShowPopUp).setOnClickListener(handler);
+        /* Vignesh Code Ends  */
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -104,6 +163,157 @@ public class MainActivity extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void showPopUp()
+    {
+
+        /* Custom Code  Starts*/
+        String myjson = "{\n" +
+                "    \"Result\": [\n" +
+                "        {\n" +
+                "            \"heading\": {\n" +
+                "                \"title\": \"general\"\n" +
+                "            },\n" +
+                "            \"listcontent\": [\n" +
+                "                {\n" +
+                "                    \"icon\": \"essential\",\n" +
+                "                    \"title\": \"Essential\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"icon\": \"men\",\n" +
+                "                    \"title\": \"Men\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"icon\": \"women\",\n" +
+                "                    \"title\": \"Women\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"icon\": \"others\",\n" +
+                "                    \"title\": \"Others\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"heading\": {\n" +
+                "                \"title\": \"demo\"\n" +
+                "            },\n" +
+                "            \"listcontent\": [\n" +
+                "                {\n" +
+                "                    \"icon\": \"home\",\n" +
+                "                    \"title\": \"Home\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"icon\": \"about\",\n" +
+                "                    \"title\": \"About Us\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"icon\": \"policy\",\n" +
+                "                    \"title\": \"Delievery Policy\"\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"icon\": \"contact\",\n" +
+                "                    \"title\": \"Contact Us\"\n" +
+                "                }\n" +
+                "            ]\n" +
+                "        }\n" +
+                "    ]\n" +
+                "} ";
+
+        ArrayList<Heading> headings = new ArrayList<Heading>();
+
+        try
+        {
+            JSONObject initialdata = new JSONObject(myjson);
+            JSONArray result = initialdata.getJSONArray("Result");
+
+            for(int i=0;i<result.length();i++) {
+
+                JSONObject jobj = result.getJSONObject(i);
+                JSONObject heading = jobj.getJSONObject("heading");//for heading pojo
+                Heading h = new Heading();
+                h.setTitle(heading.getString("title"));
+                JSONArray listcontent = jobj.getJSONArray("listcontent");
+
+                ArrayList<Content> contents = new ArrayList<Content>();
+                for (int j = 0; j < listcontent.length(); j++)
+                {
+                    JSONObject temp = listcontent.getJSONObject(j);
+                    Content c = new Content();
+                    c.setTitle(temp.getString("title"));
+                    c.setIcon(temp.getString("icon"));
+                    contents.add(c);
+                    System.out.println("vign" + c.toString());
+                }
+                h.setContents(contents);
+                stringContentHashMap.put(h.getTitle(),h.getContents());
+                headings.add(h);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+        MyList myList = new MyList(this,R.layout.navigation_drawer_layout,headings);
+        ListView listViewItems = new ListView(this);
+        listViewItems.setAdapter(myList);
+
+        System.out.println("VVV"+headings.toString());
+       /* Custom Code Ends */
+
+        alertDialogStores = new AlertDialog.Builder(MainActivity.this)
+                .setView(listViewItems)
+                .setTitle("Stores")
+                .show();
+
+
+    }
+
+    private class GetData extends AsyncTask<String , String , String>
+    {
+        @Override
+        protected void onPreExecute()
+        {
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setMessage("Loading Please Wait...");
+            progressDialog.show();
+        }
+
+        protected String doInBackground(String... arg0)
+        {
+            mdata = RestfulService.source(AppConstants.URLConstants.essentials);
+            return mdata;
+        }
+
+        protected void onPostExecute(String data)
+        {
+            if(progressDialog.isShowing())
+            {
+                progressDialog.dismiss();
+            }
+            processJson(data);
+        }
+
+        private void processJson(String data)
+        {
+            try
+            {
+                JSONArray jsonArray = new JSONArray(data);
+                for(int i = 0 ; i < jsonArray.length() ; i++)
+                {
+                    InfiniteModel modelClass = new InfiniteModel();
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String title = jsonObject.getString("title");
+                    modelClass.setTitle(title);
+                    modelClasses.add(modelClass);
+                }
+            }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
