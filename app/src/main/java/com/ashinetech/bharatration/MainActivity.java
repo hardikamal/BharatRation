@@ -26,6 +26,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.ashinetech.bharatration.adapter.CustomList;
+import com.ashinetech.bharatration.adapter.InfiniteScrollList;
 import com.ashinetech.bharatration.adapter.MyList;
 import com.ashinetech.bharatration.model.Content;
 import com.ashinetech.bharatration.model.Heading;
@@ -65,17 +67,12 @@ public class MainActivity extends ActionBarActivity
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-
-       // new GetData().execute();
-       // CustomList customList = new CustomList(MainActivity.this,modelClasses);
-       // list  = (ListView) findViewById(R.id.list);
-       // list.setAdapter(customList);
-
+        new GetData().execute();
         /* Ragav Code Ends */
 
 
         /* Vignesh Code Starts */
-        View.OnClickListener handler = new View.OnClickListener(){
+     /*   View.OnClickListener handler = new View.OnClickListener(){
 
             public void onClick(View v) {
 
@@ -88,7 +85,7 @@ public class MainActivity extends ActionBarActivity
 
             }
         };
-        findViewById(R.id.buttonShowPopUp).setOnClickListener(handler);
+        findViewById(R.id.buttonShowPopUp).setOnClickListener(handler); */
         /* Vignesh Code Ends  */
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -278,6 +275,7 @@ public class MainActivity extends ActionBarActivity
         protected String doInBackground(String... arg0)
         {
             mdata = RestfulService.source(URLConstants.SERVICE_URL);
+            System.out.println("DTDTTD"+mdata);
             return mdata;
         }
 
@@ -290,7 +288,7 @@ public class MainActivity extends ActionBarActivity
             processJson(data);
         }
 
-        private void processJson(String data)
+        public void processJson(String data)
         {
             try
             {
@@ -303,6 +301,11 @@ public class MainActivity extends ActionBarActivity
                     modelClass.setTitle(title);
                     modelClasses.add(modelClass);
                 }
+
+
+                CustomList customList = new CustomList(MainActivity.this,modelClasses);
+                list  = (ListView) findViewById(R.id.list);
+                list.setAdapter(customList);
             }
             catch (JSONException e)
             {
