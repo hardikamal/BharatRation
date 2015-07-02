@@ -5,5 +5,5 @@ package com.ashinetech.bharatration.constants;
  */
 public class URLConstants
 {
-    public static final String SERVICE_URL = "http://10.0.2.2/Bharatration/index.php";
+    public static final String SERVICE_URL = "http://10.0.2.2/Bharatration/index.php?page=0";
 }

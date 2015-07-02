@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.AbsListView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -37,7 +38,8 @@ import com.ashinetech.bharatration.service.RestfulService;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks
+{
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -55,6 +57,7 @@ public class MainActivity extends ActionBarActivity
     String mdata;
     ArrayList<InfiniteModel> modelClasses = new ArrayList<InfiniteModel>();
     ListView list;
+    int currentpage = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -258,9 +261,9 @@ public class MainActivity extends ActionBarActivity
                 .setView(listViewItems)
                 .setTitle("Stores")
                 .show();
-
-
     }
+
+
 
     private class GetData extends AsyncTask<String , String , String>
     {
@@ -306,7 +309,88 @@ public class MainActivity extends ActionBarActivity
                 CustomList customList = new CustomList(MainActivity.this,modelClasses);
                 list  = (ListView) findViewById(R.id.list);
                 list.setAdapter(customList);
+
+                list.setOnScrollListener(new AbsListView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(AbsListView view, int scrollState) {
+                        int threshold = 1;
+                        int count = list.getCount();
+
+                        if (scrollState == SCROLL_STATE_IDLE) {
+                            if (list.getLastVisiblePosition() >= count
+                                    - threshold) {
+                                // Execute LoadMoreDataTask AsyncTask
+                                new LoadMoreDataTask().execute();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+                    }
+                });
+
             }
+            catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    private class LoadMoreDataTask extends AsyncTask<String, String, String>
+    {
+        @Override
+        protected void onPreExecute()
+        {
+            progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setMessage("Loading Please Wait...");
+            progressDialog.show();
+        }
+
+        protected String doInBackground(String... arg0)
+        {
+            currentpage += 1;
+            String url = "http://10.0.2.2/Bharatration/index.php?page="+currentpage;
+            mdata = RestfulService.source(url);
+            System.out.println("Scroll"+mdata);
+            return mdata;
+        }
+
+        protected void onPostExecute(String data)
+        {
+            if(progressDialog.isShowing())
+            {
+                progressDialog.dismiss();
+            }
+            processJson(data);
+        }
+
+        public void processJson(String data)
+        {
+            try
+            {
+                JSONArray jsonArray = new JSONArray(data);
+                for(int i = 0 ; i < jsonArray.length() ; i++)
+                {
+                    InfiniteModel modelClass = new InfiniteModel();
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String title = jsonObject.getString("title");
+                    modelClass.setTitle(title);
+                    modelClasses.add(modelClass);
+                }
+
+
+                CustomList customList = new CustomList(MainActivity.this,modelClasses);
+                list  = (ListView) findViewById(R.id.list);
+                int position = list.getLastVisiblePosition();
+                list.setAdapter(customList);
+                list.setSelectionFromTop(position, 0);
+
+
+               }
             catch (JSONException e)
             {
                 e.printStackTrace();
