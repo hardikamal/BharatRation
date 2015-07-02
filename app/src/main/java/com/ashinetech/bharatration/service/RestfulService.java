@@ -29,8 +29,7 @@ public class RestfulService
 
             if (conn.getResponseCode() != 200)
             {
-                throw new RuntimeException("Failed PHP: HTTP error code : "
-                        + conn.getResponseCode());
+                // Display Error Page
             }
             BufferedReader br = new BufferedReader(new InputStreamReader((conn.getInputStream())));
 
