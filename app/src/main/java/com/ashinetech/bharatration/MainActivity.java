@@ -3,22 +3,22 @@ package com.ashinetech.bharatration;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -27,33 +27,39 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.ashinetech.bharatration.adapter.CustomList;
-import com.ashinetech.bharatration.adapter.InfiniteScrollList;
+import com.ashinetech.bharatration.adapter.Custom_Drawer_Adapter;
 import com.ashinetech.bharatration.adapter.MyList;
+import com.ashinetech.bharatration.constants.Constants;
 import com.ashinetech.bharatration.model.Content;
+import com.ashinetech.bharatration.model.DrawerItem;
 import com.ashinetech.bharatration.model.Heading;
 import com.ashinetech.bharatration.model.InfiniteModel;
-import com.ashinetech.bharatration.constants.URLConstants;
 import com.ashinetech.bharatration.service.RestfulService;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks
 {
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
+
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+
+    private CharSequence mDrawerTitle;
+    Custom_Drawer_Adapter adapter;
+
+    List<DrawerItem> dataList;
+
     private NavigationDrawerFragment mNavigationDrawerFragment;
     AlertDialog alertDialogStores;
     private HashMap<String, ArrayList<Content>> stringContentHashMap = new HashMap<>();
     private int startIndex = 0;
-    private final static int limit  = 10;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
+
+
     private CharSequence mTitle;
     Context context;
     ProgressDialog progressDialog;
@@ -65,7 +71,9 @@ public class MainActivity extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
 
         /* Ragav Code Starts */
         if (android.os.Build.VERSION.SDK_INT > 9)
@@ -73,8 +81,57 @@ public class MainActivity extends ActionBarActivity
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        new GetData().execute();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+       // new GetData().execute();
         /* Ragav Code Ends */
+
+
+        /* Navigation Drawer Starts */
+        dataList = new ArrayList<DrawerItem>();
+        mTitle = mDrawerTitle = getTitle();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
+                GravityCompat.START);
+
+        dataList.add(new DrawerItem("General"));
+        dataList.add(new DrawerItem("Home", R.drawable.ic_home));
+        dataList.add(new DrawerItem("About US", R.drawable.ic_people));
+        dataList.add(new DrawerItem("Delievery Policy", R.drawable.ic_whats_hot));
+
+        dataList.add(new DrawerItem("Shop"));
+        dataList.add(new DrawerItem("Essentails", R.drawable.ic_communities));
+        dataList.add(new DrawerItem("Kids", R.drawable.ic_photos));
+
+        if (savedInstanceState == null) {
+
+            if (dataList.get(0).getTitle() != null) {
+                SelectItem(1);
+            } else {
+                SelectItem(0);
+            }
+        }
+
+
+        adapter = new Custom_Drawer_Adapter(this, R.layout.custom_list,
+                dataList);
+
+        mDrawerList.setAdapter(adapter);
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+  //        getActionBar().setDisplayHomeAsUpEnabled(true);
+ //       getActionBar().setHomeButtonEnabled(true);
+
+
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        if (savedInstanceState == null) {
+            SelectItem(0);
+        }
+        /* Navigation Drawer Ends  */
 
 
         /* Vignesh Code Starts */
@@ -94,24 +151,18 @@ public class MainActivity extends ActionBarActivity
         findViewById(R.id.buttonShowPopUp).setOnClickListener(handler); */
         /* Vignesh Code Ends  */
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+      /*  mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getSupportFragmentManager().findFragmentById(R.id.);
         mTitle = getTitle();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout)); */
     }
 
-    @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
-    }
+
+
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -127,41 +178,41 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getSupportActionBar().setTitle(mTitle);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+     //   mDrawerToggle.syncState();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        // The action bar home/up action should open or close the drawer.
+        // ActionBarDrawerToggle will take care of this.
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
     }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+
+
+
 
     public void showPopUp()
     {
@@ -266,7 +317,30 @@ public class MainActivity extends ActionBarActivity
                 .show();
     }
 
+    public void SelectItem(int possition) {
 
+        Fragment fragment = null;
+        Bundle args = new Bundle();
+        switch (possition) {
+            default:
+                break;
+        }
+
+        mDrawerList.setItemChecked(possition, true);
+        setTitle(dataList.get(possition).getItemName());
+        mDrawerLayout.closeDrawer(mDrawerList);
+
+    }
+
+    private class DrawerItemClickListener implements
+            ListView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            SelectItem(position);
+
+        }
+    }
 
     private class GetData extends AsyncTask<String , String , String>
     {
@@ -280,7 +354,7 @@ public class MainActivity extends ActionBarActivity
 
         protected String doInBackground(String... arg0)
         {
-            mdata = RestfulService.source("http://10.0.2.2/Bharatration/index.php?startIndex="+startIndex+"&limit="+limit);
+            mdata = RestfulService.source("http://10.0.2.2/Bharatration/index.php?startIndex="+startIndex+"&limit="+ Constants.LIMIT);
             System.out.println("DTDTTD"+mdata);
             return mdata;
         }
@@ -355,8 +429,8 @@ public class MainActivity extends ActionBarActivity
 
         protected String doInBackground(String... arg0)
         {
-            startIndex += limit;
-            String url = "http://10.0.2.2/Bharatration/index.php?startIndex="+startIndex+"&limit="+limit;
+            startIndex += Constants.LIMIT;
+            String url = "http://10.0.2.2/Bharatration/index.php?startIndex="+startIndex+"&limit="+Constants.LIMIT;
             mdata = RestfulService.source(url);
             System.out.println("Scroll" + mdata);
             return mdata;
