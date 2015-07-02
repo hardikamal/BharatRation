@@ -3,7 +3,6 @@ package com.ashinetech.bharatration;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -29,12 +28,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.ashinetech.bharatration.adapter.CustomList;
-import com.ashinetech.bharatration.adapter.InfiniteScrollList;
 import com.ashinetech.bharatration.adapter.MyList;
+import com.ashinetech.bharatration.constants.Constants;
 import com.ashinetech.bharatration.model.Content;
 import com.ashinetech.bharatration.model.Heading;
 import com.ashinetech.bharatration.model.InfiniteModel;
-import com.ashinetech.bharatration.constants.URLConstants;
 import com.ashinetech.bharatration.service.RestfulService;
 
 
@@ -49,7 +47,6 @@ public class MainActivity extends ActionBarActivity
     AlertDialog alertDialogStores;
     private HashMap<String, ArrayList<Content>> stringContentHashMap = new HashMap<>();
     private int startIndex = 0;
-    private final static int limit  = 10;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -280,7 +277,7 @@ public class MainActivity extends ActionBarActivity
 
         protected String doInBackground(String... arg0)
         {
-            mdata = RestfulService.source("http://10.0.2.2/Bharatration/index.php?startIndex="+startIndex+"&limit="+limit);
+            mdata = RestfulService.source(Constants.SERVICE_URL+"?startIndex="+startIndex+"&limit="+Constants.INFINITE_SCROLL_BATCH_LIMIT);
             System.out.println("DTDTTD"+mdata);
             return mdata;
         }
@@ -355,8 +352,8 @@ public class MainActivity extends ActionBarActivity
 
         protected String doInBackground(String... arg0)
         {
-            startIndex += limit;
-            String url = "http://10.0.2.2/Bharatration/index.php?startIndex="+startIndex+"&limit="+limit;
+            startIndex += Constants.INFINITE_SCROLL_BATCH_LIMIT;
+            String url = Constants.SERVICE_URL+"?startIndex="+startIndex+"&limit="+Constants.INFINITE_SCROLL_BATCH_LIMIT;
             mdata = RestfulService.source(url);
             System.out.println("Scroll" + mdata);
             return mdata;
