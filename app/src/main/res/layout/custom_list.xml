@@ -8,16 +8,15 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="48dp"
-        android:background="#311B92"
-        >
+        android:layout_marginTop="48dp">
 
-        <TextView
+         <TextView
             android:id="@+id/drawerTitle"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:background="#000000"
             android:textColor="#ffffff"
+            android:textSize="20dp"
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <View
