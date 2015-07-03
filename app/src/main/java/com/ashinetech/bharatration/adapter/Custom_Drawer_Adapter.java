@@ -47,7 +47,7 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
                     .findViewById(R.id.drawer_itemName);
             drawerHolder.icon = (ImageView) view.findViewById(R.id.drawer_icon);
 
-
+           // drawerHolder.logo=(ImageView)view.findViewById(R.id.logo);
 
             drawerHolder.title = (TextView) view.findViewById(R.id.drawerTitle);
 
@@ -70,6 +70,7 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
          if (dItem.getTitle() != null) {
             drawerHolder.headerLayout.setVisibility(LinearLayout.VISIBLE);
             drawerHolder.itemLayout.setVisibility(LinearLayout.INVISIBLE);
+
             drawerHolder.title.setText(dItem.getTitle());
 
         } else {
@@ -77,8 +78,9 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
             drawerHolder.headerLayout.setVisibility(LinearLayout.INVISIBLE);
             drawerHolder.itemLayout.setVisibility(LinearLayout.VISIBLE);
 
-            drawerHolder.icon.setImageDrawable(view.getResources().getDrawable(
+         drawerHolder.icon.setImageDrawable(view.getResources().getDrawable(
                     dItem.getImgResID()));
+       //  drawerHolder.logo.setImageDrawable(view.getResources().getDrawable(dItem.getLogo()));
             drawerHolder.ItemName.setText(dItem.getItemName());
 
         }
@@ -88,7 +90,7 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
     private static class DrawerItemHolder {
         TextView ItemName, title;
         ImageView icon;
-        LinearLayout headerLayout, itemLayout, spinnerLayout;
+        LinearLayout headerLayout, itemLayout;
 
     }
 }

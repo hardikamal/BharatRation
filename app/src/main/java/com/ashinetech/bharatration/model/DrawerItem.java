@@ -9,6 +9,14 @@ public class DrawerItem
     int imgResID;
     String title;
 
+
+
+
+
+
+
+
+
     public DrawerItem(String itemName, int imgResID) {
         super();
         ItemName = itemName;
@@ -19,6 +27,8 @@ public class DrawerItem
 
     public DrawerItem(String title)
     {
+
+
         this.title = title;
     }
     public String getItemName() {

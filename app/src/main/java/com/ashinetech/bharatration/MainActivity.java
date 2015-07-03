@@ -78,6 +78,8 @@ public class MainActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
         /* Ragav Code Starts */
         if (android.os.Build.VERSION.SDK_INT > 9)
@@ -96,6 +98,8 @@ public class MainActivity extends ActionBarActivity
 
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
+
+      //  dataList.add(new DrawerItem(R.drawable.ic_people));
 
         dataList.add(new DrawerItem("General"));
         dataList.add(new DrawerItem("Home", R.drawable.ic_home));
