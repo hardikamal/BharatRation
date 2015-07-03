@@ -5,12 +5,14 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,14 +28,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import com.ashinetech.bharatration.adapter.CustomList;
 import com.ashinetech.bharatration.adapter.Custom_Drawer_Adapter;
 import com.ashinetech.bharatration.adapter.MyList;
 import com.ashinetech.bharatration.model.Content;
+import com.ashinetech.bharatration.model.DrawerItem;
 import com.ashinetech.bharatration.model.Heading;
 import com.ashinetech.bharatration.model.InfiniteModel;
-import com.ashinetech.bharatration.constants.URLConstants;
+import com.ashinetech.bharatration.constants.Constants;
 import com.ashinetech.bharatration.service.RestfulService;
 
 
@@ -50,6 +54,15 @@ public class MainActivity extends ActionBarActivity
     private int startIndex = 0;
     private final static int limit  = 10;
 
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mDrawerToggle;
+
+    private CharSequence mDrawerTitle;
+    Custom_Drawer_Adapter adapter;
+
+    List<DrawerItem> dataList;
+
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -59,7 +72,7 @@ public class MainActivity extends ActionBarActivity
     String mdata;
     ArrayList<InfiniteModel> modelClasses = new ArrayList<InfiniteModel>();
     ListView list;
-    int currentpage = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +85,55 @@ public class MainActivity extends ActionBarActivity
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        new GetData().execute();
+       // new GetData().execute();
         /* Ragav Code Ends */
+
+        /* Navigation Drawer Starts */
+        dataList = new ArrayList<DrawerItem>();
+        mTitle = mDrawerTitle = getTitle();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
+                GravityCompat.START);
+
+        dataList.add(new DrawerItem("General"));
+        dataList.add(new DrawerItem("Home", R.drawable.ic_home));
+        dataList.add(new DrawerItem("About US", R.drawable.ic_people));
+        dataList.add(new DrawerItem("Delievery Policy", R.drawable.ic_whats_hot));
+
+        dataList.add(new DrawerItem("Shop"));
+        dataList.add(new DrawerItem("Essentails", R.drawable.ic_communities));
+        dataList.add(new DrawerItem("Kids", R.drawable.ic_photos));
+
+        if (savedInstanceState == null) {
+
+            if (dataList.get(0).getTitle() != null) {
+                SelectItem(1);
+            } else {
+                SelectItem(0);
+            }
+        }
+
+
+        adapter = new Custom_Drawer_Adapter(this, R.layout.custom_list,
+                dataList);
+
+        mDrawerList.setAdapter(adapter);
+       // mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+        //        getActionBar().setDisplayHomeAsUpEnabled(true);
+        //       getActionBar().setHomeButtonEnabled(true);
+
+
+
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+
+        if (savedInstanceState == null) {
+            SelectItem(0);
+        }
+        /* Navigation Drawer Ends  */
+
 
 
         /* Vignesh Code Starts */
@@ -93,14 +153,14 @@ public class MainActivity extends ActionBarActivity
         findViewById(R.id.buttonShowPopUp).setOnClickListener(handler); */
         /* Vignesh Code Ends  */
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
+     /*   mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+                (DrawerLayout) findViewById(R.id.drawer_layout));*/
     }
 
     @Override
@@ -111,6 +171,22 @@ public class MainActivity extends ActionBarActivity
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
     }
+
+    public void SelectItem(int possition) {
+
+        Fragment fragment = null;
+        Bundle args = new Bundle();
+        switch (possition) {
+            default:
+                break;
+        }
+
+        mDrawerList.setItemChecked(possition, true);
+        setTitle(dataList.get(possition).getItemName());
+        mDrawerLayout.closeDrawer(mDrawerList);
+
+    }
+
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -131,6 +207,19 @@ public class MainActivity extends ActionBarActivity
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        mTitle = title;
+        getSupportActionBar().setTitle(mTitle);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        //   mDrawerToggle.syncState();
     }
 
 
@@ -264,7 +353,6 @@ public class MainActivity extends ActionBarActivity
                 .setTitle("Stores")
                 .show();
     }
-
 
 
     private class GetData extends AsyncTask<String , String , String>
