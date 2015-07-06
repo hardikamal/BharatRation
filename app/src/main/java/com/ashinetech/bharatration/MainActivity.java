@@ -2,24 +2,24 @@ package com.ashinetech.bharatration;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.StrictMode;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.view.Window;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -38,11 +38,13 @@ import com.ashinetech.bharatration.model.DrawerItem;
 import com.ashinetech.bharatration.model.Heading;
 import com.ashinetech.bharatration.model.InfiniteModel;
 import com.ashinetech.bharatration.constants.Constants;
+import com.ashinetech.bharatration.service.FragmentOne;
+import com.ashinetech.bharatration.service.FragmentThree;
+import com.ashinetech.bharatration.service.FragmentTwo;
 import com.ashinetech.bharatration.service.RestfulService;
 
 
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks
+public class MainActivity extends Activity
 {
 
     /**
@@ -56,30 +58,26 @@ public class MainActivity extends ActionBarActivity
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
+    public ActionBarDrawerToggle mDrawerToggle;
 
     private CharSequence mDrawerTitle;
     Custom_Drawer_Adapter adapter;
 
     List<DrawerItem> dataList;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
     private CharSequence mTitle;
     Context context;
     ProgressDialog progressDialog;
     String mdata;
     ArrayList<InfiniteModel> modelClasses = new ArrayList<InfiniteModel>();
+    android.app.ActionBar actionBar;
     ListView list;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(true);
+
 
         /* Ragav Code Starts */
         if (android.os.Build.VERSION.SDK_INT > 9)
@@ -92,10 +90,10 @@ public class MainActivity extends ActionBarActivity
 
         /* Navigation Drawer Starts */
         dataList = new ArrayList<DrawerItem>();
-        mTitle = mDrawerTitle = getTitle();
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
+        mTitle = mDrawerTitle = getTitle();
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
 
@@ -110,70 +108,48 @@ public class MainActivity extends ActionBarActivity
         dataList.add(new DrawerItem("Essentails", R.drawable.ic_communities));
         dataList.add(new DrawerItem("Kids", R.drawable.ic_photos));
 
-        if (savedInstanceState == null) {
-
-            if (dataList.get(0).getTitle() != null) {
-                SelectItem(1);
-            } else {
-                SelectItem(0);
-            }
-        }
-
-
         adapter = new Custom_Drawer_Adapter(this, R.layout.custom_list,
                 dataList);
 
         mDrawerList.setAdapter(adapter);
-       // mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+       // actionBar = getActionBar();
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+//        actionBar.setHomeButtonEnabled(true);
+      //  actionBar.setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
 
-        //        getActionBar().setDisplayHomeAsUpEnabled(true);
-        //       getActionBar().setHomeButtonEnabled(true);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,R.string.drawer_close)
+        {
+            public void onDrawerClosed(View view)
+            {
+                getActionBar().setTitle(mTitle);
+                invalidateOptionsMenu();
+            }
 
-
+            public void onDrawerOpened(View drawerView)
+            {
+                getActionBar().setTitle(mDrawerTitle);
+                invalidateOptionsMenu();
+            }
+        };
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null)
+        {
             SelectItem(0);
         }
-        /* Navigation Drawer Ends  */
 
 
-
-        /* Vignesh Code Starts */
-     /*   View.OnClickListener handler = new View.OnClickListener(){
-
-            public void onClick(View v) {
-
-                switch (v.getId()) {
-                    case R.id.buttonShowPopUp:
-                        showPopUp();
-                        break;
-
-                }
-
-            }
-        };
-        findViewById(R.id.buttonShowPopUp).setOnClickListener(handler); */
-        /* Vignesh Code Ends  */
-
-     /*   mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
-
-        // Set up the drawer.
-        mNavigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));*/
     }
 
+    /* Functions for naigational drawer starts */
     @Override
-    public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
     }
 
     public void SelectItem(int possition) {
@@ -181,9 +157,104 @@ public class MainActivity extends ActionBarActivity
         Fragment fragment = null;
         Bundle args = new Bundle();
         switch (possition) {
+            case 0:
+                fragment = new FragmentOne();
+                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 1:
+                fragment = new FragmentTwo();
+                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 2:
+                fragment = new FragmentThree();
+                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 3:
+                fragment = new FragmentOne();
+                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 4:
+                fragment = new FragmentTwo();
+                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 5:
+                fragment = new FragmentThree();
+                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 6:
+                fragment = new FragmentOne();
+                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 7:
+                fragment = new FragmentTwo();
+                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 8:
+                fragment = new FragmentThree();
+                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 9:
+                fragment = new FragmentOne();
+                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 10:
+                fragment = new FragmentTwo();
+                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 11:
+                fragment = new FragmentThree();
+                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
+            case 12:
+                fragment = new FragmentOne();
+                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
+                        .getItemName());
+                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
+                        .getImgResID());
+                break;
             default:
                 break;
         }
+
+        fragment.setArguments(args);
+        android.app.FragmentManager frgManager = getFragmentManager();
+        frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         mDrawerList.setItemChecked(possition, true);
         setTitle(dataList.get(possition).getItemName());
@@ -191,72 +262,40 @@ public class MainActivity extends ActionBarActivity
 
     }
 
-
-    public void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }
-    }
-
-    public void restoreActionBar() {
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-        actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setTitle(mTitle);
-    }
-
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
-        getSupportActionBar().setTitle(mTitle);
+        getActionBar().setTitle(mTitle);
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        //   mDrawerToggle.syncState();
+        mDrawerToggle.syncState();
     }
 
-
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-       /* if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.main, menu);
-            restoreActionBar();
-
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
-        */
-        return true;
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Pass any configuration change to the drawer toggles
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        // The action bar home/up action should open or close the drawer.
+        // ActionBarDrawerToggle will take care of this.
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
     }
+
+    /* Function for navigational drawer ends */
+
+
 
     public void showPopUp()
     {
@@ -503,43 +542,12 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public PlaceholderFragment() {
-        }
-
+    private class DrawerItemClickListener implements ListView.OnItemClickListener
+    {
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            return rootView;
-        }
-
-        @Override
-        public void onAttach(Activity activity) {
-            super.onAttach(activity);
-            ((MainActivity) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+        {
+            SelectItem(position);
         }
     }
 
