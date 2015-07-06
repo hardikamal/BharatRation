@@ -9,13 +9,20 @@ public class DrawerItem
     int imgResID;
     String title;
 
+    public int getLogo() {
+        return logo;
+    }
 
+    public void setLogo(int logo) {
+        this.logo = logo;
+    }
 
+    int logo;
 
-
-
-
-
+    public  DrawerItem(int logo)
+    {
+        this.logo=logo;
+    }
 
     public DrawerItem(String itemName, int imgResID) {
         super();

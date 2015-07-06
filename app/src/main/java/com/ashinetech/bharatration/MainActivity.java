@@ -97,7 +97,7 @@ public class MainActivity extends Activity
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
 
-      //  dataList.add(new DrawerItem(R.drawable.ic_people));
+        dataList.add(new DrawerItem(R.drawable.logoheader));
 
         dataList.add(new DrawerItem("General"));
         dataList.add(new DrawerItem("Home", R.drawable.ic_home));
@@ -116,7 +116,7 @@ public class MainActivity extends Activity
         actionBar = getActionBar();
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-
+        getActionBar().setDisplayShowTitleEnabled(false);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,R.string.drawer_close)
         {
             public void onDrawerClosed(View view)
@@ -136,7 +136,13 @@ public class MainActivity extends Activity
 
         if (savedInstanceState == null)
         {
-            SelectItem(0);
+                if(dataList.get(1).getTitle() != null) {
+                SelectItem(2);
+            } else if (dataList.get(0).getTitle() != null) {
+                SelectItem(1);
+            } else {
+                SelectItem(0);
+            }
         }
 
 
@@ -263,7 +269,7 @@ public class MainActivity extends Activity
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
-//        getActionBar().setTitle(mTitle);
+        getActionBar().setTitle(mTitle);
     }
 
     @Override

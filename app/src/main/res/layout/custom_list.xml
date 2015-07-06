@@ -4,6 +4,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/image_header"
+
+        >
+        <ImageView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+
+            android:id="@+id/logo"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="0dp"
+             ></View>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/headerLayout"

@@ -47,7 +47,7 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
                     .findViewById(R.id.drawer_itemName);
             drawerHolder.icon = (ImageView) view.findViewById(R.id.drawer_icon);
 
-           // drawerHolder.logo=(ImageView)view.findViewById(R.id.logo);
+            drawerHolder.logo=(ImageView)view.findViewById(R.id.logo);
 
             drawerHolder.title = (TextView) view.findViewById(R.id.drawerTitle);
 
@@ -55,6 +55,8 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
                     .findViewById(R.id.headerLayout);
             drawerHolder.itemLayout = (LinearLayout) view
                     .findViewById(R.id.itemLayout);
+            drawerHolder.imageHeader = (LinearLayout) view
+                    .findViewById(R.id.image_header);
 
 
             view.setTag(drawerHolder);
@@ -70,18 +72,20 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
          if (dItem.getTitle() != null) {
             drawerHolder.headerLayout.setVisibility(LinearLayout.VISIBLE);
             drawerHolder.itemLayout.setVisibility(LinearLayout.INVISIBLE);
-
+             drawerHolder.imageHeader.setVisibility(LinearLayout.VISIBLE);
             drawerHolder.title.setText(dItem.getTitle());
 
         } else {
 
             drawerHolder.headerLayout.setVisibility(LinearLayout.INVISIBLE);
             drawerHolder.itemLayout.setVisibility(LinearLayout.VISIBLE);
-
+             drawerHolder.imageHeader.setVisibility(LinearLayout.VISIBLE);
              if(dItem.getImgResID() != 0) {
                  drawerHolder.icon.setImageDrawable(view.getResources().getDrawable(dItem.getImgResID()));
              }
-        // drawerHolder.logo.setImageDrawable(view.getResources().getDrawable(dItem.getLogo()));
+             if(dItem.getLogo()!=0) {
+                 drawerHolder.logo.setImageDrawable(view.getResources().getDrawable(dItem.getLogo()));
+             }
          drawerHolder.ItemName.setText(dItem.getItemName());
 
         }
@@ -90,8 +94,10 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
 
     private static class DrawerItemHolder {
         TextView ItemName, title;
-        ImageView icon;
-        LinearLayout headerLayout, itemLayout;
+        ImageView icon,logo;
+        LinearLayout headerLayout, itemLayout,imageHeader;
+
+
 
     }
 }
