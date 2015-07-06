@@ -113,10 +113,8 @@ public class MainActivity extends Activity
 
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-       // actionBar = getActionBar();
+        actionBar = getActionBar();
         getActionBar().setDisplayHomeAsUpEnabled(true);
-//        actionBar.setHomeButtonEnabled(true);
-      //  actionBar.setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,R.string.drawer_close)
@@ -257,7 +255,7 @@ public class MainActivity extends Activity
         frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
         mDrawerList.setItemChecked(possition, true);
-        setTitle(dataList.get(possition).getItemName());
+//        setTitle(dataList.get(possition).getItemName());
         mDrawerLayout.closeDrawer(mDrawerList);
 
     }
@@ -265,7 +263,7 @@ public class MainActivity extends Activity
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
-        getActionBar().setTitle(mTitle);
+//        getActionBar().setTitle(mTitle);
     }
 
     @Override

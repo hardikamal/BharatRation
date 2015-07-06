@@ -33,8 +33,8 @@ public class FragmentOne extends Fragment {
         tvItemName = (TextView) view.findViewById(R.id.frag1_text);
 
         tvItemName.setText(getArguments().getString(ITEM_NAME));
-        ivIcon.setImageDrawable(view.getResources().getDrawable(
-                getArguments().getInt(IMAGE_RESOURCE_ID)));
+//        ivIcon.setImageDrawable(view.getResources().getDrawable(
+           //     getArguments().getInt(IMAGE_RESOURCE_ID)));
         return view;
     }
 
