@@ -11,11 +11,9 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.view.Window;
 import android.widget.AbsListView;
@@ -30,12 +28,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.ashinetech.bharatration.adapter.CustomList;
-import com.ashinetech.bharatration.adapter.Custom_Drawer_Adapter;
-import com.ashinetech.bharatration.adapter.MyList;
+import com.ashinetech.bharatration.adapter.InfiniteScrollListAdapter;
+import com.ashinetech.bharatration.adapter.NavigationDrawerAdapter;
 import com.ashinetech.bharatration.model.Content;
-import com.ashinetech.bharatration.model.DrawerItem;
-import com.ashinetech.bharatration.model.Heading;
+import com.ashinetech.bharatration.model.NavigationDrawerModel;
 import com.ashinetech.bharatration.model.InfiniteModel;
 import com.ashinetech.bharatration.constants.Constants;
 import com.ashinetech.bharatration.service.FragmentOne;
@@ -50,7 +46,6 @@ public class MainActivity extends Activity
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
-    private NavigationDrawerFragment mNavigationDrawerFragment;
     AlertDialog alertDialogStores;
     private HashMap<String, ArrayList<Content>> stringContentHashMap = new HashMap<>();
     private int startIndex = 0;
@@ -61,9 +56,9 @@ public class MainActivity extends Activity
     public ActionBarDrawerToggle mDrawerToggle;
 
     private CharSequence mDrawerTitle;
-    Custom_Drawer_Adapter adapter;
+    NavigationDrawerAdapter adapter;
 
-    List<DrawerItem> dataList;
+    List<NavigationDrawerModel> dataList;
 
     private CharSequence mTitle;
     Context context;
@@ -85,11 +80,11 @@ public class MainActivity extends Activity
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-       // new GetData().execute();
+        //new GetData().execute();
         /* Ragav Code Ends */
 
         /* Navigation Drawer Starts */
-        dataList = new ArrayList<DrawerItem>();
+        dataList = new ArrayList<NavigationDrawerModel>();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
@@ -97,18 +92,18 @@ public class MainActivity extends Activity
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow,
                 GravityCompat.START);
 
-        dataList.add(new DrawerItem(R.drawable.logoheader));
+        dataList.add(new NavigationDrawerModel(R.drawable.logoheader));
 
-        dataList.add(new DrawerItem("General"));
-        dataList.add(new DrawerItem("Home", R.drawable.ic_home));
-        dataList.add(new DrawerItem("About US", R.drawable.ic_people));
-        dataList.add(new DrawerItem("Delievery Policy", R.drawable.ic_whats_hot));
+        dataList.add(new NavigationDrawerModel("General"));
+        dataList.add(new NavigationDrawerModel("Home", R.drawable.ic_home));
+        dataList.add(new NavigationDrawerModel("About US", R.drawable.ic_people));
+        dataList.add(new NavigationDrawerModel("Delievery Policy", R.drawable.ic_whats_hot));
 
-        dataList.add(new DrawerItem("Shop"));
-        dataList.add(new DrawerItem("Essentails", R.drawable.ic_communities));
-        dataList.add(new DrawerItem("Kids", R.drawable.ic_photos));
+        dataList.add(new NavigationDrawerModel("Shop"));
+        dataList.add(new NavigationDrawerModel("Essentails", R.drawable.ic_communities));
+        dataList.add(new NavigationDrawerModel("Kids", R.drawable.ic_photos));
 
-        adapter = new Custom_Drawer_Adapter(this, R.layout.custom_list,
+        adapter = new NavigationDrawerAdapter(this, R.layout.navigation_drawer_item,
                 dataList);
 
         mDrawerList.setAdapter(adapter);
@@ -163,10 +158,7 @@ public class MainActivity extends Activity
         switch (possition) {
             case 0:
                 fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+
                 break;
             case 1:
                 fragment = new FragmentTwo();
@@ -184,10 +176,7 @@ public class MainActivity extends Activity
                 break;
             case 3:
                 fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+
                 break;
             case 4:
                 fragment = new FragmentTwo();
@@ -205,10 +194,7 @@ public class MainActivity extends Activity
                 break;
             case 6:
                 fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+
                 break;
             case 7:
                 fragment = new FragmentTwo();
@@ -226,10 +212,7 @@ public class MainActivity extends Activity
                 break;
             case 9:
                 fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+
                 break;
             case 10:
                 fragment = new FragmentTwo();
@@ -247,10 +230,7 @@ public class MainActivity extends Activity
                 break;
             case 12:
                 fragment = new FragmentOne();
-                args.putString(FragmentOne.ITEM_NAME, dataList.get(possition)
-                        .getItemName());
-                args.putInt(FragmentOne.IMAGE_RESOURCE_ID, dataList.get(possition)
-                        .getImgResID());
+
                 break;
             default:
                 break;
@@ -301,108 +281,6 @@ public class MainActivity extends Activity
 
 
 
-    public void showPopUp()
-    {
-
-        /* Custom Code  Starts*/
-        String myjson = "{\n" +
-                "    \"Result\": [\n" +
-                "        {\n" +
-                "            \"heading\": {\n" +
-                "                \"title\": \"general\"\n" +
-                "            },\n" +
-                "            \"listcontent\": [\n" +
-                "                {\n" +
-                "                    \"icon\": \"essential\",\n" +
-                "                    \"title\": \"Essential\"\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"icon\": \"men\",\n" +
-                "                    \"title\": \"Men\"\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"icon\": \"women\",\n" +
-                "                    \"title\": \"Women\"\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"icon\": \"others\",\n" +
-                "                    \"title\": \"Others\"\n" +
-                "                }\n" +
-                "            ]\n" +
-                "        },\n" +
-                "        {\n" +
-                "            \"heading\": {\n" +
-                "                \"title\": \"demo\"\n" +
-                "            },\n" +
-                "            \"listcontent\": [\n" +
-                "                {\n" +
-                "                    \"icon\": \"home\",\n" +
-                "                    \"title\": \"Home\"\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"icon\": \"about\",\n" +
-                "                    \"title\": \"About Us\"\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"icon\": \"policy\",\n" +
-                "                    \"title\": \"Delievery Policy\"\n" +
-                "                },\n" +
-                "                {\n" +
-                "                    \"icon\": \"contact\",\n" +
-                "                    \"title\": \"Contact Us\"\n" +
-                "                }\n" +
-                "            ]\n" +
-                "        }\n" +
-                "    ]\n" +
-                "} ";
-
-        ArrayList<Heading> headings = new ArrayList<Heading>();
-
-        try
-        {
-            JSONObject initialdata = new JSONObject(myjson);
-            JSONArray result = initialdata.getJSONArray("Result");
-
-            for(int i=0;i<result.length();i++) {
-
-                JSONObject jobj = result.getJSONObject(i);
-                JSONObject heading = jobj.getJSONObject("heading");//for heading pojo
-                Heading h = new Heading();
-                h.setTitle(heading.getString("title"));
-                JSONArray listcontent = jobj.getJSONArray("listcontent");
-
-                ArrayList<Content> contents = new ArrayList<Content>();
-                for (int j = 0; j < listcontent.length(); j++)
-                {
-                    JSONObject temp = listcontent.getJSONObject(j);
-                    Content c = new Content();
-                    c.setTitle(temp.getString("title"));
-                    c.setIcon(temp.getString("icon"));
-                    contents.add(c);
-                    System.out.println("vign" + c.toString());
-                }
-                h.setContents(contents);
-                stringContentHashMap.put(h.getTitle(),h.getContents());
-                headings.add(h);
-            }
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
-
-        MyList myList = new MyList(this,R.layout.navigation_drawer_layout,headings);
-        ListView listViewItems = new ListView(this);
-        listViewItems.setAdapter(myList);
-
-        System.out.println("VVV"+headings.toString());
-       /* Custom Code Ends */
-
-        alertDialogStores = new AlertDialog.Builder(MainActivity.this)
-                .setView(listViewItems)
-                .setTitle("Stores")
-                .show();
-    }
 
 
     private class GetData extends AsyncTask<String , String , String>
@@ -446,9 +324,9 @@ public class MainActivity extends Activity
                 }
 
 
-                CustomList customList = new CustomList(MainActivity.this,modelClasses);
+                InfiniteScrollListAdapter infiniteScrollListAdapter = new InfiniteScrollListAdapter(MainActivity.this,modelClasses);
                 list  = (ListView) findViewById(R.id.list);
-                list.setAdapter(customList);
+                list.setAdapter(infiniteScrollListAdapter);
 
                 list.setOnScrollListener(new AbsListView.OnScrollListener() {
                     @Override
@@ -531,10 +409,10 @@ public class MainActivity extends Activity
                 }
 
 
-                CustomList customList = new CustomList(MainActivity.this,modelClasses);
+                InfiniteScrollListAdapter infiniteScrollListAdapter = new InfiniteScrollListAdapter(MainActivity.this,modelClasses);
                 list  = (ListView) findViewById(R.id.list);
                 int position = list.getLastVisiblePosition();
-                list.setAdapter(customList);
+                list.setAdapter(infiniteScrollListAdapter);
                 list.setSelectionFromTop(position, 0);
 
 

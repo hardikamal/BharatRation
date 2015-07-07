@@ -11,23 +11,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ashinetech.bharatration.R;
-import com.ashinetech.bharatration.model.DrawerItem;
+import com.ashinetech.bharatration.model.NavigationDrawerModel;
 
 import java.util.List;
 
 /**
  * Created by ragavendran on 02-07-2015.
  */
-public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
+public class NavigationDrawerAdapter extends ArrayAdapter<NavigationDrawerModel>
 {
     Context context;
-    List<DrawerItem> drawerItemList;
+    List<NavigationDrawerModel> navigationDrawerModelList;
     int layoutResID;
 
-    public Custom_Drawer_Adapter(Context context, int layoutResID,List<DrawerItem> drawerItems) {
-        super(context, layoutResID,drawerItems);
+    public NavigationDrawerAdapter(Context context, int layoutResID, List<NavigationDrawerModel> navigationDrawerModels) {
+        super(context, layoutResID, navigationDrawerModels);
         this.context = context;
-        this.drawerItemList = drawerItems;
+        this.navigationDrawerModelList = navigationDrawerModels;
         this.layoutResID = layoutResID;
     }
 
@@ -66,7 +66,7 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
 
         }
 
-        DrawerItem dItem = (DrawerItem) this.drawerItemList.get(position);
+        NavigationDrawerModel dItem = (NavigationDrawerModel) this.navigationDrawerModelList.get(position);
 
 
          if (dItem.getTitle() != null) {
@@ -92,12 +92,10 @@ public class Custom_Drawer_Adapter extends ArrayAdapter<DrawerItem>
         return view;
     }
 
-    private static class DrawerItemHolder {
+    private static class DrawerItemHolder
+    {
         TextView ItemName, title;
         ImageView icon,logo;
         LinearLayout headerLayout, itemLayout,imageHeader;
-
-
-
     }
 }

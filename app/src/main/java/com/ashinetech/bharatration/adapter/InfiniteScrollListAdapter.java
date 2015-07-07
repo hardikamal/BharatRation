@@ -18,7 +18,7 @@ import com.ashinetech.bharatration.model.InfiniteModel;
 /**
  * Created by ragavendran on 30-06-2015.
  */
-public class CustomList extends ArrayAdapter<InfiniteModel>
+public class InfiniteScrollListAdapter extends ArrayAdapter<InfiniteModel>
 {
     private ArrayList<InfiniteModel> infiniteModelArrayAdapter = null;
     private final Activity context;
@@ -28,7 +28,7 @@ public class CustomList extends ArrayAdapter<InfiniteModel>
     private boolean isLoading;
 
     ArrayAdapter<InfiniteModel> adapter;
-    public CustomList(Activity context, ArrayList<InfiniteModel> infiniteModelArrayAdapter)
+    public InfiniteScrollListAdapter(Activity context, ArrayList<InfiniteModel> infiniteModelArrayAdapter)
     {
         super(context, R.layout.list_single,infiniteModelArrayAdapter);
         this.context = context;

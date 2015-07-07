@@ -3,40 +3,34 @@ package com.ashinetech.bharatration.model;
 /**
  * Created by ragavendran on 02-07-2015.
  */
-public class DrawerItem
+public class NavigationDrawerModel
 {
     String ItemName;
     int imgResID;
     String title;
-
-    public int getLogo() {
-        return logo;
-    }
-
-    public void setLogo(int logo) {
-        this.logo = logo;
-    }
-
     int logo;
 
-    public  DrawerItem(int logo)
+    public NavigationDrawerModel(int logo)
     {
         this.logo=logo;
     }
 
-    public DrawerItem(String itemName, int imgResID) {
+    public NavigationDrawerModel(String itemName, int imgResID) {
         super();
         ItemName = itemName;
         this.imgResID = imgResID;
-
-
     }
 
-    public DrawerItem(String title)
+    public NavigationDrawerModel(String title)
     {
-
-
         this.title = title;
+    }
+
+    public int getLogo() {
+        return logo;
+    }
+    public void setLogo(int logo) {
+        this.logo = logo;
     }
     public String getItemName() {
         return ItemName;
@@ -56,5 +50,4 @@ public class DrawerItem
     public void setTitle(String title) {
         this.title = title;
     }
-
 }
