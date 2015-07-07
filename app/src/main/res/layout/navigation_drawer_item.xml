@@ -28,17 +28,18 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="0dp">
+        android:layout_marginTop="0dp"
+        android:background="@drawable/list_selector">
 
          <TextView
             android:id="@+id/drawerTitle"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:background="#000000"
             android:textColor="#ffffff"
             android:textSize="24dp"
              android:paddingTop="4dp"
              android:paddingLeft="4dp"
+             android:background="@color/section_background"
             android:textAppearance="?android:attr/textAppearanceSmall"
              />
 
@@ -58,8 +59,7 @@
         android:layout_alignParentLeft="true"
         android:orientation="vertical"
         android:layout_marginTop="0dp"
-
-        android:background="?android:attr/activatedBackgroundIndicator"
+        android:background="@drawable/list_selector"
         >
 
         <LinearLayout
@@ -67,6 +67,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:minHeight="50dp"
+            android:background="@drawable/list_selector"
             >
 
             <ImageView
@@ -83,6 +84,7 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:paddingTop="20dp"
                 android:layout_marginLeft="16dp"
+                android:textColor="@color/list_item_title"
                 />
         </LinearLayout>
 
