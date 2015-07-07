@@ -70,20 +70,37 @@ public class NavigationDrawerAdapter extends ArrayAdapter<NavigationDrawerModel>
 
 
          if (dItem.getTitle() != null) {
-            drawerHolder.headerLayout.setVisibility(LinearLayout.VISIBLE);
-            drawerHolder.itemLayout.setVisibility(LinearLayout.INVISIBLE);
-             drawerHolder.imageHeader.setVisibility(LinearLayout.VISIBLE);
-            drawerHolder.title.setText(dItem.getTitle());
+             /*drawerHolder.itemLayout.setVisibility(LinearLayout.INVISIBLE);
+             drawerHolder.imageHeader.setVisibility(LinearLayout.INVISIBLE);*/
+             drawerHolder.headerLayout.setVisibility(LinearLayout.VISIBLE);
+
+             View _itemLayout = (LinearLayout) view.findViewById(R.id.itemLayout);
+             if(_itemLayout != null) ((LinearLayout)_itemLayout.getParent()).removeView(_itemLayout);
+             View _imageHeader = (LinearLayout) view.findViewById(R.id.image_header);
+             if(_imageHeader != null) ((LinearLayout)_imageHeader.getParent()).removeView(_imageHeader);
+
+             drawerHolder.title.setText(dItem.getTitle());
 
         } else {
+             //drawerHolder.headerLayout.setVisibility(LinearLayout.INVISIBLE);
+             View _headerLayout = (LinearLayout) view.findViewById(R.id.headerLayout);
+             if(_headerLayout != null) ((LinearLayout)_headerLayout.getParent()).removeView(_headerLayout);
 
-            drawerHolder.headerLayout.setVisibility(LinearLayout.INVISIBLE);
-            drawerHolder.itemLayout.setVisibility(LinearLayout.VISIBLE);
-             drawerHolder.imageHeader.setVisibility(LinearLayout.VISIBLE);
+
              if(dItem.getImgResID() != 0) {
+                 //drawerHolder.imageHeader.setVisibility(LinearLayout.INVISIBLE);
+                 View _imageHeader = (LinearLayout) view.findViewById(R.id.image_header);
+                 if(_imageHeader != null) ((LinearLayout)_imageHeader.getParent()).removeView(_imageHeader);
+
+                 drawerHolder.itemLayout.setVisibility(LinearLayout.VISIBLE);
                  drawerHolder.icon.setImageDrawable(view.getResources().getDrawable(dItem.getImgResID()));
              }
              if(dItem.getLogo()!=0) {
+                 //drawerHolder.itemLayout.setVisibility(LinearLayout.INVISIBLE);
+                 View _itemLayout = (LinearLayout) view.findViewById(R.id.itemLayout);
+                 if(_itemLayout != null) ((LinearLayout)_itemLayout.getParent()).removeView(_itemLayout);
+
+                 drawerHolder.imageHeader.setVisibility(LinearLayout.VISIBLE);
                  drawerHolder.logo.setImageDrawable(view.getResources().getDrawable(dItem.getLogo()));
              }
          drawerHolder.ItemName.setText(dItem.getItemName());

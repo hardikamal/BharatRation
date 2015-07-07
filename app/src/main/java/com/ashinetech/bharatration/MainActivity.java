@@ -96,11 +96,11 @@ public class MainActivity extends Activity
 
         dataList.add(new NavigationDrawerModel("General"));
         dataList.add(new NavigationDrawerModel("Home", R.drawable.ic_home));
-        dataList.add(new NavigationDrawerModel("About US", R.drawable.ic_people));
-        dataList.add(new NavigationDrawerModel("Delievery Policy", R.drawable.ic_whats_hot));
+        dataList.add(new NavigationDrawerModel("About Us", R.drawable.ic_people));
+        dataList.add(new NavigationDrawerModel("Delivery Policy", R.drawable.ic_whats_hot));
 
         dataList.add(new NavigationDrawerModel("Shop"));
-        dataList.add(new NavigationDrawerModel("Essentails", R.drawable.ic_communities));
+        dataList.add(new NavigationDrawerModel("Essentials", R.drawable.ic_communities));
         dataList.add(new NavigationDrawerModel("Kids", R.drawable.ic_photos));
 
         adapter = new NavigationDrawerAdapter(this, R.layout.navigation_drawer_item,
@@ -151,27 +151,30 @@ public class MainActivity extends Activity
         return true;
     }
 
-    public void SelectItem(int possition) {
+    public void SelectItem(int position) {
 
+        System.out.println("Position:" + position);
         Fragment fragment = null;
         Bundle args = new Bundle();
-        switch (possition) {
+        switch (position) {
             case 0:
-                fragment = new FragmentOne();
+                return;
+                /*fragment = new FragmentOne();
 
-                break;
+                break;*/
             case 1:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                return;
+                /*fragment = new FragmentTwo();
+                args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
                         .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
+                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(position)
                         .getImgResID());
-                break;
+                break;*/
             case 2:
                 fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
+                args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
                         .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
+                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
                         .getImgResID());
                 break;
             case 3:
@@ -180,34 +183,35 @@ public class MainActivity extends Activity
                 break;
             case 4:
                 fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
                         .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
+                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(position)
                         .getImgResID());
                 break;
             case 5:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
+                return;
+                /*fragment = new FragmentThree();
+                args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
                         .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
+                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
                         .getImgResID());
-                break;
+                break;*/
             case 6:
                 fragment = new FragmentOne();
 
                 break;
             case 7:
                 fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
                         .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
+                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(position)
                         .getImgResID());
                 break;
             case 8:
                 fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
+                args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
                         .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
+                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
                         .getImgResID());
                 break;
             case 9:
@@ -216,16 +220,16 @@ public class MainActivity extends Activity
                 break;
             case 10:
                 fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(possition)
+                args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
                         .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(possition)
+                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(position)
                         .getImgResID());
                 break;
             case 11:
                 fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
+                args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
                         .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
+                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
                         .getImgResID());
                 break;
             case 12:
@@ -239,11 +243,9 @@ public class MainActivity extends Activity
         fragment.setArguments(args);
         android.app.FragmentManager frgManager = getFragmentManager();
         frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-        mDrawerList.setItemChecked(possition, true);
+        mDrawerList.setItemChecked(position, true);
 //        setTitle(dataList.get(possition).getItemName());
         mDrawerLayout.closeDrawer(mDrawerList);
-
     }
 
     @Override

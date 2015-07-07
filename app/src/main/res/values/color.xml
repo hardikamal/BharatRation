@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="list_item_title">#ffff394a</color>
-    <color name="list_background">#ffffffff</color>
-    <color name="list_background_pressed">#bbffbb</color>
-    <color name="section_background">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="grey_light">#f7f7f7</color>
+    <color name="grey_medium">#DADADC</color>
+    <color name="grey_medium_dark">#ffababab</color>
+    <color name="grey_dark">#2F2E2E</color>
+
+    <color name="list_item_title">@color/grey_dark</color>
+    <color name="list_item_white_font">@color/white</color>
+    <color name="list_background">@color/white</color>
+    <color name="list_background_pressed">@color/white</color>
+    <color name="section_background">@color/grey_light</color>
 </resources>
