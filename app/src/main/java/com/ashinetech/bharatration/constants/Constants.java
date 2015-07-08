@@ -8,4 +8,6 @@ public class Constants {
     public static final String SERVICE_URL = "http://"+ EnvironmentConstants.SERVER_HOST+"/Bharatration/index.php";
 
     public static final int INFINITE_SCROLL_BATCH_LIMIT = 10;
+
+    public static final String MENU_HOME = "Home";
 }

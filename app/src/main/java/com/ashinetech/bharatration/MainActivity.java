@@ -12,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.support.v4.widget.DrawerLayout;
@@ -122,7 +123,7 @@ public class MainActivity extends Activity
 
             public void onDrawerOpened(View drawerView)
             {
-                getActionBar().setTitle(mDrawerTitle);
+                getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu();
             }
         };
@@ -143,12 +144,13 @@ public class MainActivity extends Activity
 
     }
 
-    /* Functions for naigational drawer starts */
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     public void SelectItem(int position) {
@@ -159,17 +161,8 @@ public class MainActivity extends Activity
         switch (position) {
             case 0:
                 return;
-                /*fragment = new FragmentOne();
-
-                break;*/
             case 1:
                 return;
-                /*fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(position)
-                        .getImgResID());
-                break;*/
             case 2:
                 fragment = new FragmentThree();
                 args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
@@ -244,7 +237,18 @@ public class MainActivity extends Activity
         android.app.FragmentManager frgManager = getFragmentManager();
         frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         mDrawerList.setItemChecked(position, true);
-//        setTitle(dataList.get(possition).getItemName());
+        if(dataList.get(position).getItemName() == Constants.MENU_HOME)
+        {
+            actionBar.setDisplayShowTitleEnabled(false);
+            getActionBar().setDisplayShowHomeEnabled(true);
+        }
+        else
+        {
+            getActionBar().setDisplayShowHomeEnabled(false);
+            actionBar.setDisplayShowTitleEnabled(true);
+            setTitle(dataList.get(position).getItemName());
+        }
+
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 

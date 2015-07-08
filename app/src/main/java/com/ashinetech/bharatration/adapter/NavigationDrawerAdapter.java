@@ -96,7 +96,7 @@ public class NavigationDrawerAdapter extends ArrayAdapter<NavigationDrawerModel>
                  drawerHolder.icon.setImageDrawable(view.getResources().getDrawable(dItem.getImgResID()));
              }
              if(dItem.getLogo()!=0) {
-                 //drawerHolder.itemLayout.setVisibility(LinearLayout.INVISIBLE);
+                 //drawerHolder.itemLayout.setVisibility(LinearLayout.INVIS1IBLE);
                  View _itemLayout = (LinearLayout) view.findViewById(R.id.itemLayout);
                  if(_itemLayout != null) ((LinearLayout)_itemLayout.getParent()).removeView(_itemLayout);
 
