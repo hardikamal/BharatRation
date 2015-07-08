@@ -1,24 +1,15 @@
-package com.ashinetech.bharatration.service;
+package com.ashinetech.bharatration;
 
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.ashinetech.bharatration.R;
-
-public class FragmentOne extends Fragment {
-
-    ImageView ivIcon;
-    TextView tvItemName;
-
-    public FragmentOne()
-    {
-
-    }
+/**
+ * Created by Vignesh on 08-07-2015.
+ */
+public class Aboutus  extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

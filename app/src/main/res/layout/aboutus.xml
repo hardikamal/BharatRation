@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <LinearLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:background="@color/grey_medium"
+       android:layout_marginTop="20dp">
+
+       <TextView
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:textSize="20sp"
+           android:textScaleX="1.4"
+           android:text="BharathRation ensure to provide the exact brand and quantity of goods which you have ordered.
+
+With our widely covered delivery network we make the delivery possible at your doorstep at your convenient time.
+
+We provide home delivery. After your verification of quality and specifications, we accept the payment.
+
+Mission: We work on Volume Discount to Individual Purchase.
+
+We have right mix of Technology, Business  Service sector people with us. BharathRation welcomes innovative ideas and work on arriving at possible business model.
+
+We believe lot more is possible when thought simple."/>
+   </LinearLayout>
+
+</LinearLayout>

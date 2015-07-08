@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_medium_dark"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:text="1.What if I am not getting the same product which I ordered?"
+            android:textStyle="bold">
+            </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:text="If any alternate brand is delivered, the product can be returned by the customer and the corresponding price will be waived off from the bill amount."
+           >
+        </TextView>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_medium_dark"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:text="2.What if I get two 500 ml pack instead of one 1 litre pack / one 1 litre pack instead of two 500 ml?"
+            android:textStyle="bold">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/abc_background_cache_hint_selector_material_dark"
+            android:text="The same item(s) will be delivered at free of cost"
+            >
+        </TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

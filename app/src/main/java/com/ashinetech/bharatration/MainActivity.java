@@ -11,6 +11,7 @@ import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +20,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,6 +57,9 @@ public class MainActivity extends Activity
     private int startIndex = 0;
     private final static int limit  = 10;
 
+    LayoutInflater mInflater;
+    View mCustomView1;
+
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     public ActionBarDrawerToggle mDrawerToggle;
@@ -68,8 +76,11 @@ public class MainActivity extends Activity
     ArrayList<InfiniteModel> modelClasses = new ArrayList<InfiniteModel>();
     android.app.ActionBar actionBar;
     ListView list;
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_main);
@@ -110,9 +121,13 @@ public class MainActivity extends Activity
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         actionBar = getActionBar();
+
+
+
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
+
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,R.string.drawer_close)
         {
             public void onDrawerClosed(View view)
@@ -141,7 +156,6 @@ public class MainActivity extends Activity
             }
         }
 
-
     }
 
     @Override
@@ -153,7 +167,8 @@ public class MainActivity extends Activity
         return super.onCreateOptionsMenu(menu);
     }
 
-    public void SelectItem(int position) {
+    public void SelectItem(int position)
+    {
 
         System.out.println("Position:" + position);
         Fragment fragment = null;
@@ -171,15 +186,12 @@ public class MainActivity extends Activity
                         .getImgResID());
                 break;
             case 3:
-                fragment = new FragmentOne();
+                fragment = new Aboutus();
 
                 break;
             case 4:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(position)
-                        .getImgResID());
+                fragment = new DevliveryPolicy();
+
                 break;
             case 5:
                 return;
@@ -238,16 +250,68 @@ public class MainActivity extends Activity
         frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         mDrawerList.setItemChecked(position, true);
         if(dataList.get(position).getItemName() == Constants.MENU_HOME)
-        {
-            actionBar.setDisplayShowTitleEnabled(false);
-            getActionBar().setDisplayShowHomeEnabled(true);
-        }
-        else
-        {
-            getActionBar().setDisplayShowHomeEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(true);
-            setTitle(dataList.get(position).getItemName());
-        }
+    {
+        actionBar.setDisplayShowTitleEnabled(false);
+        getActionBar().setDisplayShowHomeEnabled(true);
+        mInflater = LayoutInflater.from(this);
+        mCustomView1 = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView tvs = (TextView)mCustomView1.findViewById(R.id.txt1);
+        tvs.setText(" ");
+        actionBar.setCustomView(mCustomView1);
+
+
+
+        ImageView  imgv1 =(ImageView)mCustomView1.findViewById(R.id.imageView1);
+        ImageView  imgv2 =(ImageView)mCustomView1.findViewById(R.id.imageView2);
+
+        imgv1.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "You Clicked Shopping",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+        imgv2.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "You Clicked Search",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+        actionBar.setCustomView(mCustomView1);
+        actionBar.setDisplayShowCustomEnabled(true);
+
+
+    }
+    else
+    {
+        getActionBar().setDisplayShowHomeEnabled(false);
+
+        mInflater = LayoutInflater.from(this);
+        mCustomView1 = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView tvs = (TextView)mCustomView1.findViewById(R.id.txt1);
+        tvs.setText(dataList.get(position).getItemName());
+        ImageView  imgv1 =(ImageView)mCustomView1.findViewById(R.id.imageView1);
+        ImageView  imgv2 =(ImageView)mCustomView1.findViewById(R.id.imageView2);
+
+        imgv1.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "You Clicked Shopping",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+        imgv2.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "You Clicked Search",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+        actionBar.setCustomView(mCustomView1);
+        actionBar.setDisplayShowCustomEnabled(true);
+
+    }
 
         mDrawerLayout.closeDrawer(mDrawerList);
     }
@@ -436,6 +500,9 @@ public class MainActivity extends Activity
         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
         {
             SelectItem(position);
+
+
+
         }
     }
 
