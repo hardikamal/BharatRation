@@ -20,7 +20,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -58,7 +57,7 @@ public class MainActivity extends Activity
     private final static int limit  = 10;
 
     LayoutInflater mInflater;
-    View mCustomView1;
+    View mCustomView;
 
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -190,7 +189,7 @@ public class MainActivity extends Activity
 
                 break;
             case 4:
-                fragment = new DevliveryPolicy();
+                fragment = new DeliveryPolicy();
 
                 break;
             case 5:
@@ -202,7 +201,7 @@ public class MainActivity extends Activity
                         .getImgResID());
                 break;*/
             case 6:
-                fragment = new FragmentOne();
+               fragment = new FragmentOne();
 
                 break;
             case 7:
@@ -250,70 +249,47 @@ public class MainActivity extends Activity
         frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         mDrawerList.setItemChecked(position, true);
         if(dataList.get(position).getItemName() == Constants.MENU_HOME)
-    {
-        actionBar.setDisplayShowTitleEnabled(false);
-        getActionBar().setDisplayShowHomeEnabled(true);
-        mInflater = LayoutInflater.from(this);
-        mCustomView1 = mInflater.inflate(R.layout.custom_actionbar, null);
-        TextView tvs = (TextView)mCustomView1.findViewById(R.id.txt1);
-        tvs.setText(" ");
-        actionBar.setCustomView(mCustomView1);
-
-
-
-        ImageView  imgv1 =(ImageView)mCustomView1.findViewById(R.id.imageView1);
-        ImageView  imgv2 =(ImageView)mCustomView1.findViewById(R.id.imageView2);
-
-        imgv1.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "You Clicked Shopping",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-        imgv2.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "You Clicked Search",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-        actionBar.setCustomView(mCustomView1);
-        actionBar.setDisplayShowCustomEnabled(true);
-
-
-    }
-    else
-    {
-        getActionBar().setDisplayShowHomeEnabled(false);
-
-        mInflater = LayoutInflater.from(this);
-        mCustomView1 = mInflater.inflate(R.layout.custom_actionbar, null);
-        TextView tvs = (TextView)mCustomView1.findViewById(R.id.txt1);
-        tvs.setText(dataList.get(position).getItemName());
-        ImageView  imgv1 =(ImageView)mCustomView1.findViewById(R.id.imageView1);
-        ImageView  imgv2 =(ImageView)mCustomView1.findViewById(R.id.imageView2);
-
-        imgv1.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "You Clicked Shopping",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-        imgv2.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "You Clicked Search",
-                        Toast.LENGTH_LONG).show();
-            }
-        });
-        actionBar.setCustomView(mCustomView1);
-        actionBar.setDisplayShowCustomEnabled(true);
-
-    }
-
+        {
+            String data = "";
+            customActionBarItem(data);
+            getActionBar().setDisplayShowHomeEnabled(true);
+        }
+        else
+        {
+            String data = dataList.get(position).getItemName();
+            customActionBarItem(data);
+            getActionBar().setDisplayShowHomeEnabled(false);
+        }
         mDrawerLayout.closeDrawer(mDrawerList);
+    }
+
+    private void customActionBarItem(String data) {
+        actionBar.setDisplayShowTitleEnabled(false);
+        mInflater = LayoutInflater.from(this);
+        mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        TextView tvs = (TextView)mCustomView.findViewById(R.id.txt1);
+        tvs.setText(data);
+        actionBar.setCustomView(mCustomView);
+
+        ImageView  shoppingIcon =(ImageView)mCustomView.findViewById(R.id.imageView1);
+        ImageView  searchIcon   =(ImageView)mCustomView.findViewById(R.id.imageView2);
+
+        shoppingIcon.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "You Clicked Shopping",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+        searchIcon.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "You Clicked Search",
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+        actionBar.setCustomView(mCustomView);
+        actionBar.setDisplayShowCustomEnabled(true);
     }
 
     @Override
@@ -348,7 +324,6 @@ public class MainActivity extends Activity
     }
 
     /* Function for navigational drawer ends */
-
 
 
 
@@ -500,9 +475,6 @@ public class MainActivity extends Activity
         public void onItemClick(AdapterView<?> parent, View view, int position, long id)
         {
             SelectItem(position);
-
-
-
         }
     }
 

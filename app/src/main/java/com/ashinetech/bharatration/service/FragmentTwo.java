@@ -27,7 +27,7 @@ public class FragmentTwo   extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view=inflater.inflate(R.layout.deliverypolicy,container, false);
+        View view=inflater.inflate(R.layout.fragment_layout_two,container, false);
 
 
         return view;

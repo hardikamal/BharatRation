@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 /**
  * Created by Vignesh on 08-07-2015.
  */
-public class DevliveryPolicy extends Fragment {
+public class DeliveryPolicy extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
