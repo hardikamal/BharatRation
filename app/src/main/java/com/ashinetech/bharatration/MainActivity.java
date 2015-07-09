@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -75,7 +79,8 @@ public class MainActivity extends Activity
     ArrayList<InfiniteModel> modelClasses = new ArrayList<InfiniteModel>();
     android.app.ActionBar actionBar;
     ListView list;
-
+    private Handler mHandler = new Handler();
+    private Runnable mRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -83,7 +88,6 @@ public class MainActivity extends Activity
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_main);
-
 
         /* Ragav Code Starts */
         if (android.os.Build.VERSION.SDK_INT > 9)
@@ -127,6 +131,8 @@ public class MainActivity extends Activity
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
 
+
+
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer1, R.string.drawer_open,R.string.drawer_close)
         {
             public void onDrawerClosed(View view)
@@ -154,6 +160,11 @@ public class MainActivity extends Activity
             }
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
     @Override
@@ -321,7 +332,7 @@ public class MainActivity extends Activity
             return true;
         }
 
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     /* Function for navigational drawer ends */

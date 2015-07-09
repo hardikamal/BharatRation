@@ -16,15 +16,17 @@ public class BharatLauncherActivity extends Activity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_launcher);
         getActionBar().hide();
+        setContentView(R.layout.activity_launcher);
 
-        Timer timer = new Timer();
+
+       Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
                 startActivity(new Intent(BharatLauncherActivity.this,MainActivity.class));
             }
         },1000);
+
     }
 }

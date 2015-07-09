@@ -10,4 +10,6 @@ public class Constants {
     public static final int INFINITE_SCROLL_BATCH_LIMIT = 10;
 
     public static final String MENU_HOME = "Home";
+
+    public static final int SPLASH_TIME_OUT = 1000;
 }
