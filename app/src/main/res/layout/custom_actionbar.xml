@@ -15,7 +15,7 @@
         android:layout_height="35dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="80dp"
+        android:layout_marginRight="60dp"
         android:src="@drawable/shoppingcart" />
 
     <ImageView
@@ -24,6 +24,7 @@
         android:layout_height="35dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
         android:src="@drawable/search" />
 
 
