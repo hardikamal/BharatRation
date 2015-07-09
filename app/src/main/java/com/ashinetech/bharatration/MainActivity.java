@@ -140,10 +140,9 @@ public class MainActivity extends Activity
                 getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu();
             }
+
         };
-
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
         if (savedInstanceState == null)
         {
                 if(dataList.get(1).getTitle() != null) {
@@ -289,6 +288,7 @@ public class MainActivity extends Activity
                         Toast.LENGTH_LONG).show();
             }
         });
+
         actionBar.setCustomView(mCustomView);
         actionBar.setDisplayShowCustomEnabled(true);
     }
