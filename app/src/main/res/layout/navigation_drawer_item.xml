@@ -34,11 +34,12 @@
          <TextView
             android:id="@+id/drawerTitle"
             android:layout_width="fill_parent"
-            android:layout_height="20dp"
+            android:layout_height="22dp"
             android:textColor="@color/grey_medium_dark"
-            android:textSize="12dp"
+            android:textSize="14dp"
             android:paddingTop="2dp"
             android:paddingLeft="4dp"
+             android:textStyle="bold"
             android:background="@color/section_background"
             android:textAppearance="?android:attr/textAppearanceSmall"
              />
@@ -71,16 +72,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_margin="0dp"
+                android:layout_gravity="center"
                 />
 
             <TextView
                 android:id="@+id/drawer_itemName"
                 android:layout_width="wrap_content"
-                android:layout_height="35dp"
+                android:layout_height="30dp"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:paddingTop="0dp"
                 android:layout_marginLeft="0dp"
                 android:textColor="@color/list_item_title"
+                android:layout_gravity="center"
                 />
         </LinearLayout>
 
