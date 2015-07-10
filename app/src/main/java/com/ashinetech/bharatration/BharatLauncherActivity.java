@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.ashinetech.bharatration.constants.Constants;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,7 +28,6 @@ public class BharatLauncherActivity extends Activity
             public void run() {
                 startActivity(new Intent(BharatLauncherActivity.this,MainActivity.class));
             }
-        },1000);
-
+        }, Constants.SPLASH_TIME_OUT);
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * Created by Vignesh on 08-07-2015.
@@ -17,6 +18,8 @@ public class Aboutus  extends Fragment {
 
         View view = inflater.inflate(R.layout.aboutus, container,
                 false);
+
+
 
         return view;
     }

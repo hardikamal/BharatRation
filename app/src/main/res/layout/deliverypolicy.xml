@@ -4,20 +4,21 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent" android:padding="25dp"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="20dp"
     android:layout_height="match_parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="1.What if I am not getting the same product which I ordered?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="If any alternate brand is delivered, the product can be returned by the customer and the corresponding price will be waived off from the bill amount."
            >
         </TextView>
@@ -27,14 +28,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="2.What if I get two 500 ml pack instead of one 1 litre pack / one 1 litre pack instead of two 500 ml?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="The same item(s) will be delivered at free of cost"
             >
         </TextView>
@@ -44,14 +45,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="3.What if any package is broken during transit?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="The product can be returned, it will not be charged."
             >
         </TextView>
@@ -61,14 +62,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="4.What if there is a leakage of oil / liquid items inside the pack of items?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="Return the entire pack. We will supply you the materials during the next delivery slot available on the next day."
             >
         </TextView>
@@ -78,14 +79,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="5.What if the quality of unbranded packed items is not good?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="Return the specific item which doesn't meet your quality expectation. We will take your feedback and work with stores on improvement of quality of the items."
             >
         </TextView>
@@ -96,20 +97,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="6.What is OnDot and Flexible Delivery?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="OnDot Delivery: Order today, Get it within 1 day(s) on your time slot. Orders booked after 7PM is processed only on next day.">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="Flexible Delivery: Delivery required after 1 day(s) will be delivered on the date and time you mention in the comments."
             >
         </TextView>
@@ -120,14 +121,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="7.What if any product I get is not within the specified expiry date?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="We do rigorous check on quality and expiry dates before dispatch. We insist customers also to check on expiry dates from your end.
 In the very unlikely event, the entire bill amount will be free and the particular product to be returned to us for taking corrective actions."
             >
@@ -139,14 +140,14 @@ In the very unlikely event, the entire bill amount will be free and the particul
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="8.Where do I call for the customer complaints?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="Call us at 044-43065555 between 9 am to 6 pm Or mail to us at customersupport@bharathration.com"
             >
         </TextView>
@@ -157,14 +158,14 @@ In the very unlikely event, the entire bill amount will be free and the particul
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="9.What if I am not available at the time of delivery?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="In case of your unavailability at the time of delivery, we will call you for an alternate place of delivery at your nearest location. If the call is not attended / the alternate place is not provided by you, then a message will be sent to you and the items will be taken back. On the subsequent delivery, delivery charges will be added to your bill."
             >
         </TextView>
@@ -175,14 +176,14 @@ In the very unlikely event, the entire bill amount will be free and the particul
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="10.How long will the delivery person wait outside your house during the delivery slot?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="10 Minutes if you are not reachable , 20 Minutes on your request"
             >
         </TextView>
@@ -193,14 +194,14 @@ In the very unlikely event, the entire bill amount will be free and the particul
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:text="11.How can I cancel my order?"
             android:textStyle="bold">
         </TextView>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textSize="13sp"
             android:text="You have the option available in Order History page to cancel the order. Orders can be cancelled with in 6 hrs from the time order is placed.
 For cancellations after 6 hrs please call our customer care number on 044-43065555 between 9 am to 6 pm."
             >

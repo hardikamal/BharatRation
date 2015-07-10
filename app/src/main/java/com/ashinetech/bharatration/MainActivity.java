@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.content.Context;
@@ -24,8 +26,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Window;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +60,10 @@ public class MainActivity extends Activity
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
+
+    private static final String[] COUNTRIES = new String[] { "Belgium",
+            "France", "France_", "Italy", "Germany", "Spain" };
+
     AlertDialog alertDialogStores;
     private HashMap<String, ArrayList<Content>> stringContentHashMap = new HashMap<>();
     private int startIndex = 0;
@@ -131,6 +140,49 @@ public class MainActivity extends Activity
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
 
+        /* vignesh code starts */
+        Intent intent  = getIntent();
+
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(this,
+                    SuggestionProvider.AUTHORITY, SuggestionProvider.MODE);
+            suggestions.saveRecentQuery(query, null);
+        }
+
+        /* vignesh code ends */
+
+
+         /* vignesh custom code starts */
+        actionBar.setDisplayShowCustomEnabled(true);
+        LayoutInflater inflator = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_actionbar, null);
+
+        actionBar.setCustomView(v);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+        AutoCompleteTextView textView = (AutoCompleteTextView) v
+                .findViewById(R.id.editText1);
+        textView.setAdapter(adapter);
+        final Intent intent1 =new Intent(this,SearchResults.class);
+        final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.editText1);
+        autoCompleteTextView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if((keyCode==KeyEvent.KEYCODE_ENTER))
+                {
+                    System.out.println("hello hello");
+
+                    intent1.putExtra("Search",autoCompleteTextView.getText().toString());
+                    startActivity(intent1);
+                }
+                return false;
+            }
+        });
+
+        /*vignesh custom code ends */
 
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer1, R.string.drawer_open,R.string.drawer_close)
@@ -165,16 +217,6 @@ public class MainActivity extends Activity
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        //return super.onCreateOptionsMenu(menu);
-        return false;
     }
 
     public void SelectItem(int position)
@@ -261,22 +303,40 @@ public class MainActivity extends Activity
         mDrawerList.setItemChecked(position, true);
         if(dataList.get(position).getItemName() == Constants.MENU_HOME)
         {
-            String data = "";
+            String data = "Bharat Ration";
             customActionBarItem(data);
-            getActionBar().setDisplayShowHomeEnabled(true);
+            getActionBar().setDisplayShowHomeEnabled(false);
+
         }
         else
         {
-            String data = dataList.get(position).getItemName();
-            customActionBarItem(data);
-            getActionBar().setDisplayShowHomeEnabled(false);
+            String data;
+            if (dataList.get(position).getItemName() == Constants.MENU_HOME) {
+                actionBar.setDisplayShowTitleEnabled(false);
+                data="";
+                customActionBarItem(data);
+            }
+            else {
+                data = dataList.get(position).getItemName();
+                customActionBarItem(data);
+                getActionBar().setDisplayShowHomeEnabled(false);
+            }
         }
         mDrawerLayout.closeDrawer(mDrawerList);
     }
+    private void customActionBarItem(String data)
+    {
 
+        actionBar.setTitle(data);
+        actionBar.setDisplayShowTitleEnabled(true);
+    }
+ /*
     private void customActionBarItem(String data) {
-        actionBar.setDisplayShowTitleEnabled(false);
-        mInflater = LayoutInflater.from(this);
+        actionBar.setTitle(data);
+        actionBar.setDisplayShowTitleEnabled(true);
+       mInflater = LayoutInflater.from(this);
+
+
         mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         TextView tvs = (TextView)mCustomView.findViewById(R.id.txt1);
         tvs.setText(data);
@@ -292,6 +352,7 @@ public class MainActivity extends Activity
                         Toast.LENGTH_LONG).show();
             }
         });
+
         searchIcon.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
@@ -302,8 +363,9 @@ public class MainActivity extends Activity
 
         actionBar.setCustomView(mCustomView);
         actionBar.setDisplayShowCustomEnabled(true);
-    }
 
+    }
+ */
     @Override
     public void setTitle(CharSequence title) {
         mTitle = title;
@@ -323,22 +385,47 @@ public class MainActivity extends Activity
         // Pass any configuration change to the drawer toggles
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+       /* MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.bharatration, menu);
+
+        // Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+                .getSearchableInfo(getComponentName()));
+
+        return super.onCreateOptionsMenu(menu);
+
+     */
+        return false;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // The action bar home/up action should open or close the drawer.
         // ActionBarDrawerToggle will take care of this.
+
+        super.onOptionsItemSelected(item);
+       /*
+        switch(item.getItemId()){
+            case R.id.shopping:
+                Toast.makeText(getBaseContext(), "You selected shopping", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        */
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     /* Function for navigational drawer ends */
-
-
-
 
     private class GetData extends AsyncTask<String , String , String>
     {
@@ -413,7 +500,6 @@ public class MainActivity extends Activity
             }
         }
     }
-
 
     private class LoadMoreDataTask extends AsyncTask<String, String, String>
     {

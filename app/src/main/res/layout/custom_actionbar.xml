@@ -1,31 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="50dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center" >
 
-    <TextView
+    <AutoCompleteTextView
+        android:id="@+id/editText1"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_centerVertical="true"
-        android:textSize="24sp"
-        android:id="@+id/txt1"/>
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginLeft="60dp"
+        android:imeOptions="actionSearch"
+        android:inputType="textAutoComplete|textAutoCorrect"
+        android:textColor="#FFFFFF"
+     >
+
+        <requestFocus />
+    </AutoCompleteTextView>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/search"/>
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="60dp"
-        android:src="@drawable/shoppingcart" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/shoppingcart"/>
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/search" />
-
-
-</RelativeLayout>
+</LinearLayout>
