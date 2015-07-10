@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.StrictMode;
 import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.GravityCompat;
 import android.content.Context;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +56,7 @@ import com.ashinetech.bharatration.service.FragmentTwo;
 import com.ashinetech.bharatration.service.RestfulService;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends FragmentActivity
 {
 
     /**
@@ -254,7 +256,7 @@ public class MainActivity extends Activity
                         .getImgResID());
                 break;*/
             case 6:
-               fragment = new FragmentOne();
+               fragment = new Products();
 
                 break;
             case 7:
