@@ -1,6 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="#ffffff"
     android:layout_height="match_parent">
+
+
+    <!-- Outer Linear Layout Starts -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/product_layout_1">
+
+        <!-- Product image starts -->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_image"
+            android:src="@drawable/one"
+        />
+        <!-- Product image ends -->
+
+        <!-- product content outer layout starts -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_layout_1a"
+            android:orientation="vertical">
+
+            <!-- Layout to hold product name,brp and total price starts -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/product_layout_1a_1">
+
+                <!-- Layout to group product name and brp starts -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.7"
+                    android:id="@+id/product_1a_1_i1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/category_name"
+                        android:text="Salt"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/brp"
+                        android:text="(Rs 50)"/>
+
+                </LinearLayout>
+                <!-- Layout to group product name and brp ends -->
+
+                <!-- Layout to group product total price starts-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.3"
+                    android:id="@+id/product_1a_1_i2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/product_total_price"
+                        android:text="Rs 100"/>
+
+                </LinearLayout>
+                <!-- Layout to group product total price ends -->
+
+            </LinearLayout>
+            <!-- Layout to hold product name,brp and total price ends-->
+
+            <!-- Layout to hold product type , tab and icons starts -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/product_layout_1a_2">
+
+                <!-- Layout to group product type and tabs starts -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.3"
+                    android:id="@+id/product_1a_2_i1">
+
+                    <Spinner
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/product_type"/>
+
+                    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:tools="http://schemas.android.com/tools"
+                        android:id="@+id/item_detail_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </LinearLayout>
+                <!-- Layout to group product type and tabs ends -->
+
+                <!-- Layout to group product icons starts-->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="0.3"
+                    android:id="@+id/product_1a_2_i2">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/fav"
+                        android:id="@+id/product_favourites"/>
+                    <ImageView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                        android:src="@drawable/cart"
+                       android:id="@+id/product_cart"/>
+
+                </LinearLayout>
+                <!-- Layout to group product icons starts-->
+
+            </LinearLayout>
+            <!-- Layout to hold product type , tab and icons ends -->
+
+        </LinearLayout>
+        <!-- product content outer layout ends   -->
+
+    </LinearLayout>
+    <!-- Outer Linear Layout ends  -->
+
 
 </LinearLayout>
