@@ -63,8 +63,8 @@ public class MainActivity extends FragmentActivity
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
 
-    private static final String[] COUNTRIES = new String[] { "Belgium",
-            "France", "France_", "Italy", "Germany", "Spain" };
+    private static final String[] COUNTRIES = new String[] { "Essentials","Women","Kids and Men","Others",
+       };
 
     AlertDialog alertDialogStores;
     private HashMap<String, ArrayList<Content>> stringContentHashMap = new HashMap<>();
