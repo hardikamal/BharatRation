@@ -127,7 +127,9 @@ public class MainActivity extends FragmentActivity
 
         dataList.add(new NavigationDrawerModel("Shop"));
         dataList.add(new NavigationDrawerModel("Essentials", R.drawable.ic_communities));
-        dataList.add(new NavigationDrawerModel("Kids", R.drawable.ic_photos));
+        dataList.add(new NavigationDrawerModel("Women",R.drawable.ic_people));
+        dataList.add(new NavigationDrawerModel("Kids and Men", R.drawable.ic_photos));
+        dataList.add(new NavigationDrawerModel("Others",R.drawable.ic_whats_hot));
 
         adapter = new NavigationDrawerAdapter(this, R.layout.navigation_drawer_item,
                 dataList);
@@ -140,7 +142,7 @@ public class MainActivity extends FragmentActivity
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayShowTitleEnabled(false);
+        getActionBar().setDisplayShowTitleEnabled(true);
         getActionBar().setDisplayShowHomeEnabled(false);
 
         /* vignesh code starts */
@@ -202,10 +204,14 @@ public class MainActivity extends FragmentActivity
         search.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
+
+                getActionBar().setDisplayShowTitleEnabled(false);
+
               final AutoCompleteTextView atv = (AutoCompleteTextView) mCustomView.findViewById(R.id.editText1);
               atv.setVisibility(View.VISIBLE);
                 atv.setAdapter(adapter1);
                 atv.setFocusable(true);
+                atv.setEms(12);
                 atv.showDropDown();
                 search.setVisibility(View.GONE);
                 final ImageView close =(ImageView) mCustomView.findViewById(R.id.img_close);
@@ -293,11 +299,8 @@ public class MainActivity extends FragmentActivity
             case 1:
                 return;
             case 2:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
-                        .getImgResID());
+                fragment = new Products();
+
                 break;
             case 3:
                 fragment = new Aboutus();
@@ -320,21 +323,15 @@ public class MainActivity extends FragmentActivity
 
                 break;
             case 7:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(position)
-                        .getImgResID());
+                fragment = new Products();
+
                 break;
             case 8:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
-                        .getImgResID());
+                fragment = new Products();
+
                 break;
             case 9:
-                fragment = new FragmentOne();
+                fragment = new Products();
 
                 break;
             case 10:
