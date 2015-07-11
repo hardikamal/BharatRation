@@ -14,7 +14,7 @@
         android:background="@color/grey_light"
         android:orientation="horizontal">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
             android:layout_weight="0.6">
@@ -37,7 +37,7 @@
                     android:text="BRP (Rs. 50)"
                     android:textColor="@color/grey_medium_dark"/>
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
         <!--<RelativeLayout
             android:layout_width="0dip"
             android:layout_height="match_parent"
@@ -84,7 +84,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:id="@+id/item_detail_container"
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="fill_parent"
                 />
         </LinearLayout>
 
@@ -102,7 +102,7 @@
         android:padding="2dp"
         android:background="@color/grey_light">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -123,7 +123,7 @@
                     android:paddingLeft="5dp"
                     android:text="Add to Wishlist"/>
             </LinearLayout>
-        </RelativeLayout>
+        </LinearLayout>
         <RelativeLayout
             android:layout_width="0dip"
             android:layout_height="wrap_content"

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -28,58 +29,28 @@ import java.util.List;
  */
 public class Products extends android.app.Fragment
 {
-    private FragmentTabHost mTabHost;
-    private ListView productListView;
-    List<Product> productList;
-    private ProductsAdapter adapter;
-
+    private List<Product> products = new ArrayList<Product>();
+    String[] productlist = new String[]{ "Tata Salt" , "Anna Poorna iodised" };
+    ListView list;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        /*View rootView = inflater.inflate(R.layout.fragment_productlist, container,false);
-        productList = new ArrayList<Product>();
+        View view=inflater.inflate(R.layout.product_listview,container, false);
 
-        productListView = (ListView) rootView.findViewById(R.id.product_listview);
 
-        productList.add(new Product());
+        for(int i = 0 ; i < 100 ; i++)
+        {
+            Product product = new Product();
+            product.setCategory_name("Salt");
+            product.setBrp("Rs 100");
+            product.setProduct_names(productlist);
+            products.add(product);
+        }
 
-        productList.add(new Product());
-        productList.add(new Product());
-        productList.add(new Product());
-        productList.add(new Product());
-
-        productList.add(new Product());
-        productList.add(new Product());
-        productList.add(new Product());
-
-        adapter = new ProductsAdapter(getActivity(), productList);
-
-        productListView.setAdapter(adapter);
-
-        setSpinner(productListView);
-        setTabs(productListView);
-        return productListView;*/
-
-        View view = inflater.inflate(R.layout.products_main, container,false);
-        setSpinner(view);
-        setTabs(view);
+        ProductsAdapter productsAdapter = new ProductsAdapter(this.getActivity(),products);
+        list = (ListView) view.findViewById(R.id.product_listview_main);
+        list.setAdapter(productsAdapter);
         return view;
-    }
 
-    private void setTabs(View view)
-    {
-        FragmentActivity fragmentActivity = (FragmentActivity) getActivity();
-        TabFragment tabFragment = new TabFragment();
-        fragmentActivity.getSupportFragmentManager().beginTransaction().add(R.id.item_detail_container,tabFragment).commit();
     }
-
-    private void setSpinner(View view)
-    {
-        Spinner spinner = (Spinner) view.findViewById(R.id.product_type);
-        String[] spinnerData = new String[]{"Anna Poorna","Tata Iodised"};
-        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item,spinnerData);
-        stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(stringArrayAdapter);
-    }
-
 }
