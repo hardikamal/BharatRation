@@ -2,9 +2,36 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
-
-
     </style>
 
+    <style name="FAQQuestion">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">13sp</item>
+        <!--<item name="android:fontFamily">Roboto</item>-->
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/grey_dark</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="FAQAnswer">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:padding">3dp</item>
+        <item name="android:textColor">@color/grey_dark</item>
+    </style>
 
+    <style name="ProductWeight">
+        <item name="android:layout_width">@dimen/product_weight_btn_width</item>
+        <item name="android:layout_height">@dimen/product_weight_btn_height</item>
+        <item name="android:textSize">@dimen/product_weight_btn_text_size</item>
+        <item name="android:padding">@dimen/product_weight_btn_padding</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:background">@drawable/button</item>
+    </style>
+
+    <style name="ProductQuantity" parent="ProductWeight">
+    </style>
 </resources>

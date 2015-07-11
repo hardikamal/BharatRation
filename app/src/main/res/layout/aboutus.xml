@@ -10,8 +10,10 @@
        <TextView
            android:layout_width="fill_parent"
            android:layout_height="wrap_content"
+           android:padding="10dp"
            android:textSize="15sp"
-           android:padding="20dp"
+           android:fontFamily="Roboto"
+           android:textColor="@color/grey_dark"
            android:text="BharathRation ensure to provide the exact brand and quantity of goods which you have ordered.
 
 With our widely covered delivery network we make the delivery possible at your doorstep at your convenient time.
@@ -23,19 +25,23 @@ We provide home delivery. After your verification of quality and specifications,
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="0dp"
         android:textStyle="bold"
+        android:fontFamily="Roboto"
+        android:textColor="@color/grey_dark"
         android:text="Mission: We work on Volume Discount to Individual Purchase. "/>
 
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:paddingTop="10dp"
+        android:fontFamily="Roboto"
+        android:textColor="@color/grey_medium_dark"
         android:text="We have right mix of Technology, Business and Service sector people with us. BharathRation welcomes innovative ideas and work on arriving at possible business model.
 
 We believe lot more is possible when thought simple. "/>
