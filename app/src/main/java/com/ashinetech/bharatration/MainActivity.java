@@ -141,6 +141,7 @@ public class MainActivity extends FragmentActivity
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
         getActionBar().setDisplayShowTitleEnabled(false);
+        getActionBar().setDisplayShowHomeEnabled(false);
 
         /* vignesh code starts */
         Intent intent  = getIntent();
@@ -155,7 +156,8 @@ public class MainActivity extends FragmentActivity
         /* vignesh code ends */
 
 
-         /* vignesh custom code starts */
+         /* vignesh custom Autocomplete code starts */
+        /*
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -183,8 +185,66 @@ public class MainActivity extends FragmentActivity
                 return false;
             }
         });
+*/
+        /*vignesh custom  Autocomplete code ends */
 
-        /*vignesh custom code ends */
+        /* vignesh code for search toggle starts */
+
+
+
+         /* vignesh code for search toggle starts */
+
+        mInflater = LayoutInflater.from(this);
+        mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+        actionBar.setDisplayShowCustomEnabled(true);
+        final ImageView search = (ImageView) mCustomView.findViewById(R.id.img_search);
+       final  ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, COUNTRIES);
+        search.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+              final AutoCompleteTextView atv = (AutoCompleteTextView) mCustomView.findViewById(R.id.editText1);
+              atv.setVisibility(View.VISIBLE);
+                atv.setAdapter(adapter1);
+                atv.setFocusable(true);
+                atv.showDropDown();
+                search.setVisibility(View.GONE);
+                final ImageView close =(ImageView) mCustomView.findViewById(R.id.img_close);
+                close.setVisibility(View.VISIBLE);
+                close.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                      close.setVisibility(View.INVISIBLE);
+                        search.setVisibility(View.VISIBLE);
+                       atv.setVisibility(View.INVISIBLE);
+
+                    }
+                });
+
+            }
+        });
+        actionBar.setCustomView(mCustomView);
+        actionBar.setDisplayShowCustomEnabled(true);
+
+        final Intent intent1 =new Intent(this,SearchResults.class);
+        final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.editText1);
+        autoCompleteTextView.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    System.out.println("hello hello");
+
+                    intent1.putExtra("Search", autoCompleteTextView.getText().toString());
+                    actionBar.setTitle(autoCompleteTextView.getText().toString());
+                    actionBar.setDisplayShowTitleEnabled(true);
+                    startActivity(intent1);
+                }
+                return false;
+            }
+        });
+
+
+         /* vignesh code for search toggle ends */
 
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,R.string.drawer_close)
@@ -331,6 +391,7 @@ public class MainActivity extends FragmentActivity
 
         actionBar.setTitle(data);
         actionBar.setDisplayShowTitleEnabled(true);
+
     }
  /*
     private void customActionBarItem(String data) {
