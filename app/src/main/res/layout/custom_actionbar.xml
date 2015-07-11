@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center"
+    android:gravity="center|right"
     android:layout_margin="5dp"
     android:paddingRight="10dp">
 
@@ -13,7 +13,7 @@
         android:imeOptions="actionSearch"
         android:inputType="textAutoComplete|textAutoCorrect"
         android:textColor="#FFFFFF"
-        android:visibility="invisible"
+        android:visibility="gone"
      >
 
         <requestFocus />
