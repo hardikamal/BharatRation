@@ -123,7 +123,7 @@ public class MainActivity extends FragmentActivity
         dataList.add(new NavigationDrawerModel("General"));
         dataList.add(new NavigationDrawerModel("Home", R.drawable.ic_home));
         dataList.add(new NavigationDrawerModel("About Us", R.drawable.ic_people));
-        dataList.add(new NavigationDrawerModel("Delivery Policy", R.drawable.ic_whats_hot));
+        dataList.add(new NavigationDrawerModel("Frequently Asked Questions", R.drawable.ic_whats_hot));
 
         dataList.add(new NavigationDrawerModel("Shop"));
         dataList.add(new NavigationDrawerModel("Essentials", R.drawable.ic_communities));

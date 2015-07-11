@@ -1,29 +1,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:gravity="center" >
+    android:gravity="center"
+    android:layout_margin="5dp"
+    android:paddingRight="10dp">
 
     <AutoCompleteTextView
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:layout_marginLeft="60dp"
         android:imeOptions="actionSearch"
         android:inputType="textAutoComplete|textAutoCorrect"
         android:textColor="#FFFFFF"
+        android:visibility="invisible"
      >
 
         <requestFocus />
     </AutoCompleteTextView>
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
         android:src="@drawable/search"/>
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:src="@drawable/shoppingcart"/>
 
 </LinearLayout>
