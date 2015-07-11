@@ -5,6 +5,7 @@
     <color name="grey_medium">#DADADC</color>
     <color name="grey_medium_dark">#ffababab</color>
     <color name="grey_dark">#2F2E2E</color>
+    <color name="green">#ff19a308</color>
     <color name="test_color">#ffe0192b</color>
 
     <color name="list_item_title">@color/grey_dark</color>

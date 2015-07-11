@@ -1,143 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
     android:background="#ffffff"
+    android:layout_margin="5dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
-    <!-- Outer Linear Layout Starts -->
+    <!-- Product Title LinearLayout Horizontal starts -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:id="@+id/product_layout_1">
+        android:layout_height="22dp"
+        android:padding="2dp"
+        android:background="@color/grey_light"
+        android:orientation="horizontal">
 
-        <!-- Product image starts -->
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/category_name"
+                    android:fontFamily="Roboto"
+                    android:textStyle="bold"
+                    android:text="Salt"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/brp"
+                    android:paddingLeft="5dp"
+                    android:text="BRP (Rs. 50)"
+                    android:textColor="@color/grey_medium_dark"/>
+            </LinearLayout>
+        </RelativeLayout>
+        <!--<RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="0.4">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="right">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sub Total: Rs. 500"/>
+            </LinearLayout>
+        </RelativeLayout>-->
+    </LinearLayout>
+
+    <!-- Product Title LinearLayout Horizontal ends -->
+
+    <!-- Product image and select options LinearLayout Horizontal starts -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/product_image"
+            android:paddingTop="10dp"
             android:src="@drawable/one"
-        />
-        <!-- Product image ends -->
-
-        <!-- product content outer layout starts -->
+            />
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/product_layout_1a"
             android:orientation="vertical">
-
-            <!-- Layout to hold product name,brp and total price starts -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Spinner
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/product_layout_1a_1">
+                android:id="@+id/product_type"
+                android:paddingLeft="5dp"/>
 
-                <!-- Layout to group product name and brp starts -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="0.7"
-                    android:id="@+id/product_1a_1_i1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/category_name"
-                        android:text="Salt"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/brp"
-                        android:text="(Rs 50)"/>
-
-                </LinearLayout>
-                <!-- Layout to group product name and brp ends -->
-
-                <!-- Layout to group product total price starts-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="0.3"
-                    android:id="@+id/product_1a_1_i2">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/product_total_price"
-                        android:text="Rs 100"/>
-
-                </LinearLayout>
-                <!-- Layout to group product total price ends -->
-
-            </LinearLayout>
-            <!-- Layout to hold product name,brp and total price ends-->
-
-            <!-- Layout to hold product type , tab and icons starts -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/item_detail_container"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/product_layout_1a_2">
-
-                <!-- Layout to group product type and tabs starts -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="0.3"
-                    android:id="@+id/product_1a_2_i1">
-
-                    <Spinner
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/product_type"/>
-
-                    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:tools="http://schemas.android.com/tools"
-                        android:id="@+id/item_detail_container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
-
-                </LinearLayout>
-                <!-- Layout to group product type and tabs ends -->
-
-                <!-- Layout to group product icons starts-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="0.3"
-                    android:id="@+id/product_1a_2_i2">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/fav"
-                        android:id="@+id/product_favourites"/>
-                    <ImageView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                        android:src="@drawable/cart"
-                       android:id="@+id/product_cart"/>
-
-                </LinearLayout>
-                <!-- Layout to group product icons starts-->
-
-            </LinearLayout>
-            <!-- Layout to hold product type , tab and icons ends -->
-
+                />
         </LinearLayout>
-        <!-- product content outer layout ends   -->
+
 
     </LinearLayout>
-    <!-- Outer Linear Layout ends  -->
+    <!-- Product image and select options LinearLayout Horizontal sends -->
 
+    <!-- Wishlist and Cart LinearLayout Horizontal starts -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:padding="2dp"
+        android:background="@color/grey_light">
 
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_gravity="center">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/fav"
+                    android:id="@+id/product_favourites"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="Add to Wishlist"/>
+            </LinearLayout>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:layout_gravity="center">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:background="@color/green"
+                android:paddingRight="5dp"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cart"
+                    android:id="@+id/product_cart"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:text="Add to Cart"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+    <!-- Wishlist and Cart LinearLayout Horizontal starts -->
 </LinearLayout>

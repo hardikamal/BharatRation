@@ -187,7 +187,7 @@ public class MainActivity extends FragmentActivity
         /*vignesh custom code ends */
 
 
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer1, R.string.drawer_open,R.string.drawer_close)
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,R.string.drawer_close)
         {
             public void onDrawerClosed(View view)
             {

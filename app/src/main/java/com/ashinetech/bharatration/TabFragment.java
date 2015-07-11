@@ -24,7 +24,7 @@ public class TabFragment extends Fragment
         mTabHost = (FragmentTabHost) view.findViewById(android.R.id.tabhost);
         mTabHost.setup(getActivity(), getChildFragmentManager(), R.id.tabcontent);
 
-        mTabHost.addTab(mTabHost.newTabSpec("Weight").setIndicator("Weight"),
+        mTabHost.addTab(mTabHost.newTabSpec("Weight").setIndicator("Weight (KG)"),
                 ProductWeight.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("Quantity").setIndicator("Quantity"),
                 ProductQuantity.class, null);
