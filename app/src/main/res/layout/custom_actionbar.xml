@@ -4,21 +4,16 @@
     android:gravity="center|right"
     android:layout_margin="5dp"
     android:paddingRight="10dp"
-    android:layout_weight="1"
     android:orientation="horizontal">
-
-
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="0.7"
-
       >
 
     <AutoCompleteTextView
         android:id="@+id/editText1"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:ems="8"
         android:imeOptions="actionSearch"
@@ -30,11 +25,9 @@
         <requestFocus />
     </AutoCompleteTextView>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        android:layout_alignParentRight="true"
         >
     <ImageView
         android:id="@+id/img_search"
@@ -42,6 +35,9 @@
         android:layout_height="15dp"
         android:src="@drawable/search"
         android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+
        />
         <ImageView
             android:id="@+id/img_close"
@@ -49,19 +45,19 @@
             android:layout_height="15dp"
             android:src="@drawable/ic_close"
             android:layout_gravity="center_vertical"
-            android:visibility="gone"/>
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            android:layout_marginRight="40dp"
+
+            />
     <ImageView
         android:id="@+id/imageView1"
-        android:paddingLeft="5dp"
         android:layout_width="22dp"
         android:layout_height="22dp"
         android:src="@drawable/shoppingcart"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentRight="true"
+        />
 
-
-
-    </LinearLayout>
-
-
-
+    </RelativeLayout>
 </LinearLayout>

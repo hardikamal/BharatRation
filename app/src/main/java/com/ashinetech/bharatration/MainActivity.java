@@ -142,7 +142,6 @@ public class MainActivity extends FragmentActivity
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayShowTitleEnabled(true);
         getActionBar().setDisplayShowHomeEnabled(false);
 
         /* vignesh code starts */
@@ -205,13 +204,13 @@ public class MainActivity extends FragmentActivity
 
             public void onClick(View view) {
 
-                getActionBar().setDisplayShowTitleEnabled(false);
+                getActionBar().setDisplayShowTitleEnabled(true);
 
               final AutoCompleteTextView atv = (AutoCompleteTextView) mCustomView.findViewById(R.id.editText1);
               atv.setVisibility(View.VISIBLE);
                 atv.setAdapter(adapter1);
                 atv.setFocusable(true);
-                atv.setEms(13);
+                atv.setEms(14);
                 atv.showDropDown();
                 search.setVisibility(View.GONE);
                 final ImageView close =(ImageView) mCustomView.findViewById(R.id.img_close);
@@ -371,7 +370,7 @@ public class MainActivity extends FragmentActivity
         {
             String data;
             if (dataList.get(position).getItemName() == Constants.MENU_HOME) {
-                actionBar.setDisplayShowTitleEnabled(false);
+                getActionBar().setDisplayShowHomeEnabled(false);
                 data="";
                 customActionBarItem(data);
             }
