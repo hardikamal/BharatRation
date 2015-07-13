@@ -211,7 +211,7 @@ public class MainActivity extends FragmentActivity
               atv.setVisibility(View.VISIBLE);
                 atv.setAdapter(adapter1);
                 atv.setFocusable(true);
-                atv.setEms(12);
+                atv.setEms(13);
                 atv.showDropDown();
                 search.setVisibility(View.GONE);
                 final ImageView close =(ImageView) mCustomView.findViewById(R.id.img_close);
