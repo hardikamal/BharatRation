@@ -189,12 +189,6 @@ public class MainActivity extends FragmentActivity
 */
         /*vignesh custom  Autocomplete code ends */
 
-        /* vignesh code for search toggle starts */
-
-
-
-         /* vignesh code for search toggle starts */
-
         mInflater = LayoutInflater.from(this);
         mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
         actionBar.setDisplayShowCustomEnabled(true);
