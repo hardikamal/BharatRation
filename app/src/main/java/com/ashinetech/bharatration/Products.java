@@ -1,24 +1,13 @@
 package com.ashinetech.bharatration;
 
 
-import android.app.Activity;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTabHost;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.TabHost;
-import android.widget.TabWidget;
 
-import com.ashinetech.bharatration.adapter.NavigationDrawerAdapter;
 import com.ashinetech.bharatration.adapter.ProductsAdapter;
-import com.ashinetech.bharatration.model.NavigationDrawerModel;
 import com.ashinetech.bharatration.model.Product;
 
 import java.util.ArrayList;
@@ -48,8 +37,9 @@ public class Products extends android.app.Fragment
         }
 
         ProductsAdapter productsAdapter = new ProductsAdapter(this.getActivity(),products);
-        list = (ListView) view.findViewById(R.id.product_listview_main);
+        list = (ListView) view.findViewById(R.id.product_listview);
         list.setAdapter(productsAdapter);
+        //((ListView)view).setAdapter(productsAdapter);
         return view;
 
     }
