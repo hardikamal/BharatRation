@@ -6,24 +6,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ashinetech.bharatration.R;
 import com.ashinetech.bharatration.TabFragment;
+import com.ashinetech.bharatration.model.Brand;
 import com.ashinetech.bharatration.model.Product;
+import com.ashinetech.bharatration.model.ProductDetail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ragavendran on 07-07-2015.
  */
-public class ProductsAdapter extends ArrayAdapter<Product>
+public class ProductsAdapter extends ArrayAdapter<ProductDetail>
 {
-    private List<Product> productArrayAdapter = null;
+    private List<ProductDetail> productArrayAdapter = null;
     private final Activity context;
 
-    public ProductsAdapter(Activity context, List<Product> productArrayAdapter)
+    public ProductsAdapter(Activity context, List<ProductDetail> productArrayAdapter)
     {
         super(context, R.layout.product_list_item, productArrayAdapter);
         this.context = context;
@@ -35,18 +39,26 @@ public class ProductsAdapter extends ArrayAdapter<Product>
     {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView= inflater.inflate(R.layout.product_list_item, null, true);
-        TextView brp = (TextView) rowView.findViewById(R.id.product_brp);
-        TextView categoryname = (TextView) rowView.findViewById(R.id.product_name);
 
-        setTabs();
+        TextView product_brp = (TextView) rowView.findViewById(R.id.product_brp);
+        TextView product_name = (TextView) rowView.findViewById(R.id.product_name);
 
         Spinner spinner = (Spinner) rowView.findViewById(R.id.product_brand);
 
-        categoryname.setText(productArrayAdapter.get(position).getCategory_name());
-        brp.setText(productArrayAdapter.get(position).getBrp());
+        product_name.setText(productArrayAdapter.get(position).getProduct_name());
 
-        ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this.context,android.R.layout.simple_spinner_item,productArrayAdapter.get(position).getProduct_names());
-        stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        List<Brand> brands = productArrayAdapter.get(position).getBrand();
+
+        List<String> brandlist = new ArrayList<String>();
+        for(Brand brand : brands) {
+            brandlist.add(brand.getBrand_name());
+        }
+
+
+
+       ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this.context,android.R.layout.simple_spinner_item,brandlist);
+       // ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<String>(this.context,android.R.layout.simple_spinner_item,productArrayAdapter.get(position).getProduct_names());
+       stringArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(stringArrayAdapter);
 
         return rowView;
