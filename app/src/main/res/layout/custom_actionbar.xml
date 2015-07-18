@@ -42,9 +42,8 @@
         >
     <ImageView
         android:id="@+id/img_search"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
         android:src="@drawable/search"
+        style="@style/actionbarImages"
         android:layout_gravity="center_vertical"
         android:layout_alignParentRight="true"
         android:layout_marginRight="40dp"
@@ -52,9 +51,8 @@
        />
         <ImageView
             android:id="@+id/img_close"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
             android:src="@drawable/ic_close"
+            style="@style/actionbarImages"
             android:layout_gravity="center_vertical"
             android:layout_alignParentRight="true"
             android:visibility="gone"
@@ -63,9 +61,8 @@
             />
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
         android:src="@drawable/shoppingcart"
+        style="@style/actionbarImages"
         android:layout_gravity="center_vertical"
         android:layout_alignParentRight="true"
         />
