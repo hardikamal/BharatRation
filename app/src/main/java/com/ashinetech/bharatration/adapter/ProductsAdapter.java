@@ -1,21 +1,28 @@
 package com.ashinetech.bharatration.adapter;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.ashinetech.bharatration.R;
 import com.ashinetech.bharatration.TabFragment;
+import com.ashinetech.bharatration.constants.EnvironmentConstants;
 import com.ashinetech.bharatration.model.Brand;
 import com.ashinetech.bharatration.model.Product;
 import com.ashinetech.bharatration.model.ProductDetail;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +33,7 @@ public class ProductsAdapter extends ArrayAdapter<ProductDetail>
 {
     private List<ProductDetail> productArrayAdapter = null;
     private final Activity context;
+    Bitmap bitmap;
 
     public ProductsAdapter(Activity context, List<ProductDetail> productArrayAdapter)
     {
@@ -48,6 +56,17 @@ public class ProductsAdapter extends ArrayAdapter<ProductDetail>
         product_name.setText(productArrayAdapter.get(position).getProduct_name());
 
         List<Brand> brands = productArrayAdapter.get(position).getBrand();
+
+        ImageView imageView = (ImageView) rowView.findViewById(R.id.product_image);
+
+        String url = "http://"+ EnvironmentConstants.SERVER_HOST+"/Bharatration/"+"four.jpg";
+
+        try {
+            bitmap = BitmapFactory.decodeStream((InputStream)new URL(url).getContent());
+            imageView.setImageBitmap(bitmap);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         List<String> brandlist = new ArrayList<String>();
         for(Brand brand : brands) {
