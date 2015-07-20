@@ -15,93 +15,58 @@
             >
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="If any alternate brand is delivered, the product can be returned by the customer and the corresponding price will be waived off from the bill amount."
            >
         </TextView>
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="What if I get two 500 ml pack instead of one 1 litre pack / one 1 litre pack instead of two 500 ml?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="The same item(s) will be delivered at free of cost"
             >
         </TextView>
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp"
-            />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="What if any package is broken during transit?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="The product can be returned, it will not be charged."
             >
         </TextView>
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="What if there is a leakage of oil / liquid items inside the pack of items?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="Return the entire pack. We will supply you the materials during the next delivery slot available on the next day."
             >
         </TextView>
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="What if the quality of unbranded packed items is not good?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="Return the specific item which doesn't meet your quality expectation. We will take your feedback and work with stores on improvement of quality of the items."
             >
         </TextView>
 
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="What is OnDot and Flexible Delivery?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="OnDot Delivery: Order today, Get it within 1 day(s) on your time slot. Orders booked after 7PM is processed only on next day.">
         </TextView>
         <TextView
@@ -111,89 +76,57 @@
             android:text="Flexible Delivery: Delivery required after 1 day(s) will be delivered on the date and time you mention in the comments."
             >
         </TextView>
-
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="What if any product I get is not within the specified expiry date?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="We do rigorous check on quality and expiry dates before dispatch. We insist customers also to check on expiry dates from your end.
 In the very unlikely event, the entire bill amount will be free and the particular product to be returned to us for taking corrective actions."
             >
         </TextView>
-
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="Where do I call for the customer complaints?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="Call us at 044-43065555 between 9 am to 6 pm Or mail to us at customersupport@bharathration.com"
             >
         </TextView>
 
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="What if I am not available at the time of delivery?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="In case of your unavailability at the time of delivery, we will call you for an alternate place of delivery at your nearest location. If the call is not attended / the alternate place is not provided by you, then a message will be sent to you and the items will be taken back. On the subsequent delivery, delivery charges will be added to your bill."
             >
         </TextView>
 
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="How long will the delivery person wait outside your house during the delivery slot?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="10 Minutes if you are not reachable , 20 Minutes on your request"
             >
         </TextView>
 
-        <Space
-            android:layout_width="fill_parent"
-            android:layout_height="10dp" />
+        <Space style="@style/space"/>
         <TextView
             style="@style/FAQQuestion"
             android:text="How can I cancel my order?">
         </TextView>
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:padding="2dp"
-            android:textColor="@color/grey_dark"
+            style="@style/FAQAnswer"
             android:text="You have the option available in Order History page to cancel the order. Orders can be cancelled with in 6 hrs from the time order is placed.
 For cancellations after 6 hrs please call our customer care number on 044-43065555 between 9 am to 6 pm."
             >
