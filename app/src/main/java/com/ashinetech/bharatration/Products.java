@@ -45,25 +45,6 @@ public class Products extends android.app.Fragment
     {
         View view=inflater.inflate(R.layout.product_listview,container, false);
 
-        /*
-        for(int i = 0 ; i < 100 ; i++)
-        {
-            Product product = new Product();
-            product.setCategory_name("Salt");
-            product.setBrp("Rs 100");
-            product.setProduct_names(productlist);
-            products.add(product);
-        }
-
-        ProductsAdapter productsAdapter = new ProductsAdapter(this.getActivity(),products);
-        list = (ListView) view.findViewById(R.id.product_listview);
-        list.setAdapter(productsAdapter);
-
-        customJsonParser(testdata);
-        */
-
-        //customJsonParser(testdata);
-
         new GetData(view).execute();
 
         return view;
@@ -82,6 +63,7 @@ public class Products extends android.app.Fragment
         protected void onPreExecute() {
             progressDialog = new ProgressDialog(getActivity());
             progressDialog.setMessage("Loading Please Wait...");
+            progressDialog.setCancelable(false);
             progressDialog.show();
         }
 
@@ -91,11 +73,13 @@ public class Products extends android.app.Fragment
             return mdata;
         }
 
-        protected void onPostExecute(String data) {
-            if (progressDialog.isShowing()) {
+        protected void onPostExecute(String data)
+        {
+            customJsonParser(data, view);
+            if (progressDialog.isShowing())
+            {
                 progressDialog.dismiss();
             }
-            customJsonParser(data, view);
         }
     }
 
@@ -147,7 +131,7 @@ public class Products extends android.app.Fragment
             list = (ListView) view.findViewById(R.id.product_listview);
             list.setAdapter(productsAdapter);
 
-            list.setOnScrollListener(new AbsListView.OnScrollListener() {
+             list.setOnScrollListener(new AbsListView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(AbsListView view, int scrollState) {
                     int threshold = 1;

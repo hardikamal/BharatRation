@@ -5,7 +5,11 @@ package com.ashinetech.bharatration.constants;
  */
 public class Constants {
 
-    public static final String SERVICE_URL = "http://"+ EnvironmentConstants.SERVER_HOST+"/Bharatration/index.php";
+    //public static final String SERVICE_URL = "http://"+ EnvironmentConstants.CLOUD_URL+"/bharatration/index.php";
+
+    public static final String SERVICE_URL = "http://cloudservices.ashinetech.com/bharatration/index.php";
+
+    public static  final String SERVICE_MAIN_URL = "http://cloudservices.ashinetech.com/bharatration";
 
     public static final int INFINITE_SCROLL_BATCH_LIMIT = 5;
 

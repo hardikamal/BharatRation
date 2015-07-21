@@ -303,7 +303,7 @@ public class MainActivity extends FragmentActivity
             case 1:
                 return;
             case 2:
-                fragment = new Products();
+                fragment = new Aboutus();
 
                 break;
             case 3:

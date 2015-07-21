@@ -6,4 +6,5 @@ package com.ashinetech.bharatration.constants;
 public class EnvironmentConstants
 {
     public static final String SERVER_HOST = "10.0.2.2";
+    public static final String CLOUD_URL = "cloudservices.ashinetech.com";
 }

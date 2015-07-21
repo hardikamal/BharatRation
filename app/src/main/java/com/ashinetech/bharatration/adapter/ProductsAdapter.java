@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.ashinetech.bharatration.R;
 import com.ashinetech.bharatration.TabFragment;
+import com.ashinetech.bharatration.constants.Constants;
 import com.ashinetech.bharatration.constants.EnvironmentConstants;
 import com.ashinetech.bharatration.model.Brand;
 import com.ashinetech.bharatration.model.Product;
@@ -59,14 +60,26 @@ public class ProductsAdapter extends ArrayAdapter<ProductDetail>
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.product_image);
 
-        String url = "http://"+ EnvironmentConstants.SERVER_HOST+"/Bharatration/"+"four.jpg";
-
-        try {
-            bitmap = BitmapFactory.decodeStream((InputStream)new URL(url).getContent());
-            imageView.setImageBitmap(bitmap);
-        } catch (IOException e) {
-            e.printStackTrace();
+        List<String> brand_img_list = new ArrayList<String>();
+        for(Brand brand : brands)
+        {
+            brand_img_list.add(brand.getBrand_image());
         }
+
+       // String brand_image = productArrayAdapter.get(position).getBrand().get(position).getBrand_image();
+        System.out.println("Brand IMAGE"+" "+brand_img_list);
+
+
+
+       /* try
+        {
+            String imgurl = Constants.SERVICE_MAIN_URL+brand_img_list.get(0);
+            bitmap = BitmapFactory.decodeStream((InputStream)new URL(imgurl).getContent());
+            imageView.setImageBitmap(bitmap);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }*/
 
         List<String> brandlist = new ArrayList<String>();
         for(Brand brand : brands) {
