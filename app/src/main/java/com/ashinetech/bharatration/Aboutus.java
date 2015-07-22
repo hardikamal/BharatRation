@@ -10,7 +10,7 @@ import android.widget.Toast;
 /**
  * Created by Vignesh on 08-07-2015.
  */
-public class Aboutus  extends Fragment {
+public class Aboutus  extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

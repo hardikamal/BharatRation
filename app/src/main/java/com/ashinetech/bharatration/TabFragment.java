@@ -21,20 +21,21 @@ public class TabFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_product_weight_qty_tabhost,container, false);
-        mTabHost = (FragmentTabHost) view.findViewById(android.R.id.tabhost);
-        mTabHost.setup(getActivity(), getChildFragmentManager(), R.id.product_tabhost_container);
 
-        //mTabHost = new FragmentTabHost(getActivity());
-        //mTabHost.setup(getActivity(), getChildFragmentManager(), R.id.product_weight_qty_container);
+        // contains the v4 tabhost layout
+        View view=inflater.inflate(R.layout.fragment_product_weight_qty_tabhost,container, false);
 
-        mTabHost.addTab(mTabHost.newTabSpec("Weight").setIndicator("Weight (KG)"),
-                ProductWeight.class, null);
-        mTabHost.addTab(mTabHost.newTabSpec("Quantity").setIndicator("Quantity"),
+
+        // set the tab properties
+        mTabHost = new FragmentTabHost(getActivity());
+        mTabHost = (FragmentTabHost)view.findViewById(android.R.id.tabhost);
+        mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
+
+        mTabHost.addTab(mTabHost.newTabSpec("quantity").setIndicator("Quantity"),
                 ProductQuantity.class, null);
-
+        mTabHost.addTab(mTabHost.newTabSpec("weight").setIndicator("Weight"),
+                ProductWeight.class, null);
         return view;
-        //return mTabHost;
     }
 
     /*@Override

@@ -2,13 +2,19 @@ package com.ashinetech.bharatration;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.TabHost;
 
 import com.ashinetech.bharatration.adapter.ProductsAdapter;
 import com.ashinetech.bharatration.constants.Constants;
@@ -24,10 +30,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.widget.TabHost;
+import android.widget.TabHost.TabSpec;
 /**
  * Created by ragavendran on 10-07-2015.
  */
-public class Products extends android.app.Fragment
+public class Products extends Fragment
 {
     private List<Product> products = new ArrayList<Product>();
     private List<ProductDetail> productDetails = new ArrayList<ProductDetail>();
@@ -36,6 +44,7 @@ public class Products extends android.app.Fragment
     private final static int limit  = 10;
     String mdata;
     ProgressDialog progressDialog;
+    private FragmentTabHost mTabHost;
 
     String[] productlist = new String[]{ "Tata Salt" , "Anna Poorna iodised" };
 
@@ -43,8 +52,61 @@ public class Products extends android.app.Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view=inflater.inflate(R.layout.product_listview,container, false);
 
+        // loads the main list view(has no child views inside it)
+        View view = inflater.inflate(R.layout.product_listview,container, false);
+
+
+        //code to load Tab Products, which loads the tab content from TabFragment class
+
+        //Error:java.lang.IllegalArgumentException: No view found for tabrealcontent
+
+        // The below code is wrong because the tab layout is already set in TabProducts so we need to
+        // call the TabProducts class and set the tab data using ProductsAdapter class.
+
+       /* FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TabProducts tabFragment = new TabProducts();
+        fragmentTransaction.add(R.id.tabrealcontent, tabFragment);
+        fragmentTransaction.addToBackStack("T");
+        fragmentTransaction.commit();
+        */
+
+
+        // Test code to bind the data for tabs but didn't work
+/*
+        mTabHost = new FragmentTabHost(getActivity());
+        mTabHost = (FragmentTabHost)view.findViewById(android.R.id.tabhost);
+        mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
+
+        mTabHost.addTab(mTabHost.newTabSpec("fragmentb").setIndicator("Fragment B"),
+                ProductQuantity.class, null);
+        mTabHost.addTab(mTabHost.newTabSpec("fragmentc").setIndicator("Fragment C"),
+                ProductWeight.class, null);
+*/
+
+
+        //This TabHost is used when this Product class is inherited from android.app.Fragment but now we have changed the
+        // to android.support.v4.app.Fragment for backward compatibility so the below code is depreciated
+
+
+        /*
+        TabHost tabHost = (TabHost)view.findViewById(android.R.id.tabhost);
+        tabHost.setup();
+
+        TabSpec tab1 = tabHost.newTabSpec("First Tab");
+        TabSpec tab2 = tabHost.newTabSpec("Second Tab");
+
+
+        tab1.setIndicator("Tab1");
+        tab1.setContent((TabHost.TabContentFactory) new ProductWeight());
+        tab2.setIndicator("Tab2");
+        tab2.setContent((TabHost.TabContentFactory) new ProductWeight());
+
+
+        tabHost.addTab(tab1);
+        tabHost.addTab(tab2);
+        */
         new GetData(view).execute();
 
         return view;
@@ -253,6 +315,7 @@ public class Products extends android.app.Fragment
             int position = list.getLastVisiblePosition();
             list.setAdapter(productsAdapter);
             list.setSelectionFromTop(position, 0);
+
 
         }
 

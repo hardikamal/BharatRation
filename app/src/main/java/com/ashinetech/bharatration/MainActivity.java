@@ -14,6 +14,7 @@ import android.os.StrictMode;
 import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.content.Context;
 import android.os.Bundle;
@@ -295,7 +296,7 @@ public class MainActivity extends FragmentActivity
     {
 
         System.out.println("Position:" + position);
-        Fragment fragment = null;
+        android.support.v4.app.Fragment fragment = null;
         Bundle args = new Bundle();
         switch (position) {
             case 0:
@@ -327,7 +328,7 @@ public class MainActivity extends FragmentActivity
 
                 break;
             case 7:
-                fragment = new Products();
+                fragment = new TabProducts();
 
                 break;
             case 8:
@@ -338,30 +339,13 @@ public class MainActivity extends FragmentActivity
                 fragment = new Products();
 
                 break;
-            case 10:
-                fragment = new FragmentTwo();
-                args.putString(FragmentTwo.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-                args.putInt(FragmentTwo.IMAGE_RESOURCE_ID, dataList.get(position)
-                        .getImgResID());
-                break;
-            case 11:
-                fragment = new FragmentThree();
-                args.putString(FragmentThree.ITEM_NAME, dataList.get(position)
-                        .getItemName());
-                args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(position)
-                        .getImgResID());
-                break;
-            case 12:
-                fragment = new FragmentOne();
 
-                break;
             default:
                 break;
         }
 
         fragment.setArguments(args);
-        android.app.FragmentManager frgManager = getFragmentManager();
+        FragmentManager frgManager = getSupportFragmentManager();
         frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         mDrawerList.setItemChecked(position, true);
 

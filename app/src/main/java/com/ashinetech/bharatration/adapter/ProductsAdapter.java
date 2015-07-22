@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class ProductsAdapter extends ArrayAdapter<ProductDetail>
     private List<ProductDetail> productArrayAdapter = null;
     private final Activity context;
     Bitmap bitmap;
+    private FragmentTabHost mTabHost;
 
     public ProductsAdapter(Activity context, List<ProductDetail> productArrayAdapter)
     {
@@ -59,6 +61,9 @@ public class ProductsAdapter extends ArrayAdapter<ProductDetail>
         List<Brand> brands = productArrayAdapter.get(position).getBrand();
 
         ImageView imageView = (ImageView) rowView.findViewById(R.id.product_image);
+
+
+
 
         List<String> brand_img_list = new ArrayList<String>();
         for(Brand brand : brands)
@@ -102,7 +107,7 @@ public class ProductsAdapter extends ArrayAdapter<ProductDetail>
         FragmentActivity fragmentActivity = (FragmentActivity) context;
         if(fragmentActivity != null) {
             TabFragment tabFragment = new TabFragment();
-            fragmentActivity.getSupportFragmentManager().beginTransaction().add(R.id.product_weight_qty_container, tabFragment).commit();
+           // fragmentActivity.getSupportFragmentManager().beginTransaction().add(R.id.product_weight_qty_container, tabFragment).commit();
             System.out.println("Tabs printed");
         }
     }
