@@ -332,11 +332,11 @@ public class MainActivity extends FragmentActivity
 
                 break;
             case 8:
-                fragment = new Products();
+                fragment = new SampleFragment();
 
                 break;
             case 9:
-                fragment = new Products();
+                fragment = new DemoProducts();
 
                 break;
 

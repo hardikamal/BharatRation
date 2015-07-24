@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Product Title LinearLayout Horizontal starts -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:padding="2dp"
+        android:background="@color/grey_light"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="0.6">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/product_name"
+                    android:fontFamily="Roboto"
+                    android:textStyle="bold"
+                    android:text="Salt"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/product_brp"
+                    android:paddingLeft="5dp"
+                    android:text="BRP (Rs. 50)"
+                    android:textColor="@color/grey_medium_dark"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Product Title LinearLayout Horizontal ends -->
+
+    <!-- Product image and select options LinearLayout Horizontal starts -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/product_image"
+            android:paddingTop="10dp"
+            android:src="@drawable/one"
+            />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Spinner
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/product_brand"
+                android:paddingLeft="5dp"/>
+
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:id="@+id/tabrealcontent">
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <!-- Product image and select options LinearLayout Horizontal ends -->
+
+   </LinearLayout>

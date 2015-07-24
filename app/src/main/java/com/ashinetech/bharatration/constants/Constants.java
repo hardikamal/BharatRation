@@ -11,6 +11,8 @@ public class Constants {
 
     public static  final String SERVICE_MAIN_URL = "http://cloudservices.ashinetech.com/bharatration";
 
+    public static  final String SERVICE_LOGIN = SERVICE_MAIN_URL+"/login.php";
+
     public static final int INFINITE_SCROLL_BATCH_LIMIT = 5;
 
     public static final String MENU_HOME = "Home";

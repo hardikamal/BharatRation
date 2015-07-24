@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
 /**
@@ -55,6 +56,14 @@ public class SearchResults extends Activity {
             txtQuery.setText("Search Query: " + query);
 
         }
+
+    }
+
+    /**
+     * Created by ragavendran on 24-Jul-2015.
+     */
+    public static class DemoProductsItem extends Fragment
+    {
 
     }
 }
