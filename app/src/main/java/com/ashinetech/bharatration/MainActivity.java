@@ -332,7 +332,7 @@ public class MainActivity extends FragmentActivity
 
                 break;
             case 8:
-                fragment = new SampleFragment();
+                fragment = new PaymentFragment();
 
                 break;
             case 9:
