@@ -140,12 +140,6 @@ public class MainActivity extends FragmentActivity
         actionBar = getActionBar();
 
         mInflater = LayoutInflater.from(this);
-     //   mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-      //  actionBar.setDisplayShowCustomEnabled(true);
-
-     //   customActionBar("Home");
-
-
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -162,41 +156,6 @@ public class MainActivity extends FragmentActivity
         }
 
         /* vignesh code ends */
-
-
-         /* vignesh custom Autocomplete code starts */
-        /*
-        actionBar.setDisplayShowCustomEnabled(true);
-        LayoutInflater inflator = (LayoutInflater) this
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflator.inflate(R.layout.custom_actionbar, null);
-
-        actionBar.setCustomView(v);
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, COUNTRIES);
-        AutoCompleteTextView textView = (AutoCompleteTextView) v
-                .findViewById(R.id.editText1);
-        textView.setAdapter(adapter);
-        final Intent intent1 =new Intent(this,SearchResults.class);
-        final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.editText1);
-        autoCompleteTextView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if((keyCode==KeyEvent.KEYCODE_ENTER))
-                {
-                    System.out.println("hello hello");
-
-                    intent1.putExtra("Search",autoCompleteTextView.getText().toString());
-                    startActivity(intent1);
-                }
-                return false;
-            }
-        });
-*/
-        /*vignesh custom  Autocomplete code ends */
-
-
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open,R.string.drawer_close)
         {
@@ -232,65 +191,6 @@ public class MainActivity extends FragmentActivity
         moveTaskToBack(true);
     }
 
-
-    private  void customActionBar(String actionbartitle) {
-
-        final String title = actionbartitle;
-        final TextView textView = (TextView) mCustomView.findViewById(R.id.text2);
-        textView.setText(title);
-
-        final ImageView search = (ImageView) mCustomView.findViewById(R.id.img_search);
-        final ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, COUNTRIES);
-        search.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-
-                textView.setText("");
-                Toast.makeText(getApplicationContext(), "You Clicked search", Toast.LENGTH_LONG).show();
-                final AutoCompleteTextView atv = (AutoCompleteTextView) mCustomView.findViewById(R.id.editText1);
-                atv.setVisibility(View.VISIBLE);
-                atv.setAdapter(adapter1);
-                atv.setFocusable(true);
-                //atv.setEms(14);
-                atv.showDropDown();
-                search.setVisibility(View.GONE);
-                final ImageView close = (ImageView) mCustomView.findViewById(R.id.img_close);
-                close.setVisibility(View.VISIBLE);
-                close.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        textView.setText(title);
-                        close.setVisibility(View.INVISIBLE);
-                        search.setVisibility(View.VISIBLE);
-                        atv.setVisibility(View.INVISIBLE);
-
-                    }
-                });
-
-            }
-        });
-      //  actionBar.setCustomView(mCustomView);
-       // actionBar.setDisplayShowCustomEnabled(true);
-
-        final Intent intent1 = new Intent(this, SearchResults.class);
-        final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.editText1);
-        autoCompleteTextView.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    System.out.println("hello hello");
-
-                    intent1.putExtra("Search", autoCompleteTextView.getText().toString());
-                    actionBar.setTitle(autoCompleteTextView.getText().toString());
-                    actionBar.setDisplayShowTitleEnabled(true);
-                    startActivity(intent1);
-                }
-                return false;
-            }
-        });
-    }
-
-         /* vignesh code for search toggle ends */
 
     public void SelectItem(int position)
     {
@@ -348,66 +248,27 @@ public class MainActivity extends FragmentActivity
         FragmentManager frgManager = getSupportFragmentManager();
         frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         mDrawerList.setItemChecked(position, true);
-
-     //   customActionBar(dataList.get(position).getItemName());
-
         if(dataList.get(position).getItemName() == Constants.MENU_HOME)
         {
-            String data = "Bharat Ration";
-            customActionBarItem(data);
+           // String data = "Bharat Ration";
+            String data;
+            data = dataList.get(position).getItemName();
             getActionBar().setDisplayShowHomeEnabled(false);
+            getActionBar().setDisplayShowTitleEnabled(true);
+            setTitle(data);
 
         }
         else
         {
-            String data;
-            if (dataList.get(position).getItemName() == Constants.MENU_HOME) {
-                getActionBar().setDisplayShowHomeEnabled(false);
-                getActionBar().setDisplayShowTitleEnabled(false);
-                data="";
-                //customActionBarItem(data);
-            }
-            else {
+
+                String data;
                 data = dataList.get(position).getItemName();
-              //  customActionBarItem(data);
                 getActionBar().setDisplayShowHomeEnabled(false);
-                getActionBar().setDisplayShowTitleEnabled(false);
-            }
+                getActionBar().setDisplayShowTitleEnabled(true);
+                setTitle(data);
+
         }
         mDrawerLayout.closeDrawer(mDrawerList);
-    }
-
-
-    private void customActionBarItem(String data) {
-
-     //  mInflater = LayoutInflater.from(this);
-     //   mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-     //   TextView tvs = (TextView)mCustomView.findViewById(R.id.text2);
-      //  tvs.setText(data);
-
-
-//        ImageView  shoppingIcon =(ImageView)mCustomView.findViewById(R.id.imageView1);
-//        ImageView  searchIcon   =(ImageView)mCustomView.findViewById(R.id.imageView2);
-//
-//        shoppingIcon.setOnClickListener(new View.OnClickListener() {
-//
-//            public void onClick(View view) {
-//                Toast.makeText(getApplicationContext(), "You Clicked Shopping",
-//                        Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
-//        searchIcon.setOnClickListener(new View.OnClickListener() {
-//
-//            public void onClick(View view) {
-//                Toast.makeText(getApplicationContext(), "You Clicked Search",
-//                        Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-     //   actionBar.setCustomView(mCustomView);
-      //  actionBar.setDisplayShowCustomEnabled(true);
-
     }
 
     @Override
