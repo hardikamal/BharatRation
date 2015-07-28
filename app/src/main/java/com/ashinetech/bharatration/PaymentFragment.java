@@ -15,7 +15,18 @@ import com.ashinetech.bharatration.model.Invoice;
 import com.ashinetech.bharatration.model.Products;
 import com.ashinetech.bharatration.model.Purchase;
 import com.ashinetech.bharatration.service.RestfulService;
+import com.google.gson.Gson;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +50,7 @@ public class PaymentFragment extends Fragment
         s.setDescription("New order");
         s.setCurrencyCode("PLN");
         s.setTotalAmount("3200");
-        s.setExtOrderId("277609");
+        s.setExtOrderId("745547");
 
 
         Products products=new Products();
@@ -92,19 +103,46 @@ public class PaymentFragment extends Fragment
 
         s.setProducts(p);
         s.setBuyer(buyer);
-        System.out.println("Values" + s);
 
-        new GetData(s).execute();
+        Gson gson = new Gson();
+        String jsonRequest = gson.toJson(s).toString();
+
+
+        System.out.println("Values" + s) ;
+
+
+        new GetData(jsonRequest).execute();
         return  view;
     }
 
     private class GetData extends AsyncTask<String , String , String>
     {
-        Purchase p;
-        GetData(Purchase p)
+        String jsonRequest;
+        GetData(String jsonRequest)
         {
-            this.p = p;
+            this.jsonRequest = jsonRequest;
         }
+
+        public HttpResponse makeRequest(String uri, String json) {
+            try {
+                HttpPost httpPost = new HttpPost(uri);
+                httpPost.setEntity(new StringEntity(json));
+                httpPost.setHeader("Accept", "application/json");
+                httpPost.setHeader("Content-type", "application/json");
+                DefaultHttpClient client = new DefaultHttpClient();
+                HttpResponse httpResponse = client.execute(httpPost);
+                return httpResponse;
+               // return new DefaultHttpClient().execute(httpPost);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
         @Override
         protected void onPreExecute() {
             progressDialog = new ProgressDialog(getActivity());
@@ -114,9 +152,26 @@ public class PaymentFragment extends Fragment
         }
 
         protected String doInBackground(String... arg0) {
-            mdata = RestfulService.source(Constants.PAYMENT_URL + "?purchase=" +p );
-            System.out.println( mdata);
-            return mdata;
+           /*mdata = RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest);
+            System.out.println("URL"+RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest));
+            System.out.println("DATA"+jsonRequest);
+            System.out.println("RESS"+mdata);
+            return mdata;*/
+             mdata = Constants.SERVICE_PAYU;
+            HttpResponse jsonresponse = makeRequest(mdata,jsonRequest);
+            final int statusCode = jsonresponse.getStatusLine().getStatusCode();
+            System.out.println("RESS"+statusCode);
+            System.out.println("REQ"+jsonRequest);
+            HttpEntity entity = jsonresponse.getEntity();
+            try {
+                String res = EntityUtils.toString(entity);
+                System.out.println("EEE"+res);
+                return res;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+
         }
 
         protected void onPostExecute(String data)
@@ -125,7 +180,7 @@ public class PaymentFragment extends Fragment
             {
                 progressDialog.dismiss();
             }
-            System.out.println("Ragav"+data);
+
         }
     }
 

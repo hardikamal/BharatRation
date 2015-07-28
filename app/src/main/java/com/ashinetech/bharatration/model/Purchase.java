@@ -3,6 +3,7 @@ package com.ashinetech.bharatration.model;
 /**
  * Created by Vignesh on 25-Jul-2015.
  */
+
 import java.util.List;
 
 
