@@ -140,10 +140,10 @@ public class MainActivity extends FragmentActivity
         actionBar = getActionBar();
 
         mInflater = LayoutInflater.from(this);
-        mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
-        actionBar.setDisplayShowCustomEnabled(true);
+     //   mCustomView = mInflater.inflate(R.layout.custom_actionbar, null);
+      //  actionBar.setDisplayShowCustomEnabled(true);
 
-        customActionBar("Home");
+     //   customActionBar("Home");
 
 
 
@@ -251,7 +251,7 @@ public class MainActivity extends FragmentActivity
                 atv.setVisibility(View.VISIBLE);
                 atv.setAdapter(adapter1);
                 atv.setFocusable(true);
-                atv.setEms(14);
+                //atv.setEms(14);
                 atv.showDropDown();
                 search.setVisibility(View.GONE);
                 final ImageView close = (ImageView) mCustomView.findViewById(R.id.img_close);
@@ -269,8 +269,8 @@ public class MainActivity extends FragmentActivity
 
             }
         });
-        actionBar.setCustomView(mCustomView);
-        actionBar.setDisplayShowCustomEnabled(true);
+      //  actionBar.setCustomView(mCustomView);
+       // actionBar.setDisplayShowCustomEnabled(true);
 
         final Intent intent1 = new Intent(this, SearchResults.class);
         final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.editText1);
@@ -349,7 +349,7 @@ public class MainActivity extends FragmentActivity
         frgManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         mDrawerList.setItemChecked(position, true);
 
-        customActionBar(dataList.get(position).getItemName());
+     //   customActionBar(dataList.get(position).getItemName());
 
         if(dataList.get(position).getItemName() == Constants.MENU_HOME)
         {
@@ -405,8 +405,8 @@ public class MainActivity extends FragmentActivity
 //            }
 //        });
 
-        actionBar.setCustomView(mCustomView);
-        actionBar.setDisplayShowCustomEnabled(true);
+     //   actionBar.setCustomView(mCustomView);
+      //  actionBar.setDisplayShowCustomEnabled(true);
 
     }
 
@@ -432,7 +432,7 @@ public class MainActivity extends FragmentActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-       /* MenuInflater inflater = getMenuInflater();
+       MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.bharatration, menu);
 
         // Associate searchable configuration with the SearchView
@@ -444,8 +444,8 @@ public class MainActivity extends FragmentActivity
 
         return super.onCreateOptionsMenu(menu);
 
-     */
-        return false;
+
+
     }
 
     @Override

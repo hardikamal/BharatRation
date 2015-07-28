@@ -28,6 +28,8 @@
             </intent-filter>
 
         </activity>
+
+
         <!-- Search results activity -->
         <activity android:name=".SearchResults"
             android:parentActivityName="com.ashinetech.bharatration.MainActivity" >
@@ -38,7 +40,10 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <provider android:name=".SuggestionProvider"
+
+
+        <provider
+            android:name=".SuggestionProvider"
             android:authorities="com.ashinetech.bharatration.SuggestionProvider"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>

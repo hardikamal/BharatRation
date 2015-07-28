@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
@@ -54,16 +55,21 @@ public class SearchResults extends Activity {
              * For now we just display the query only
              */
             txtQuery.setText("Search Query: " + query);
+            SearchRecentSuggestions suggestions =
+                    new SearchRecentSuggestions(this,
+                            SuggestionProvider.AUTHORITY,
+                            SuggestionProvider.MODE);
+            suggestions.saveRecentQuery(query,null);
 
         }
 
     }
 
-    /**
-     * Created by ragavendran on 24-Jul-2015.
-     */
-    public static class DemoProductsItem extends Fragment
-    {
 
-    }
+
+
+
+
+
+
 }
