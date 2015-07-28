@@ -143,7 +143,7 @@ public class MainActivity extends FragmentActivity
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
-        getActionBar().setDisplayShowHomeEnabled(true);
+        getActionBar().setDisplayShowHomeEnabled(false);
 
         /* vignesh code starts */
         Intent intent  = getIntent();
@@ -302,10 +302,7 @@ public class MainActivity extends FragmentActivity
                 .getActionView();
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getComponentName()));
-
         return super.onCreateOptionsMenu(menu);
-
-
 
     }
 

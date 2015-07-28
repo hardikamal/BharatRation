@@ -15,6 +15,7 @@
         android:icon="@drawable/shoppingcart"
         android:title="shoppingcart"
         android:showAsAction="always"
+        tools:ignore="AppCompatResource"
         />
 
 </menu>

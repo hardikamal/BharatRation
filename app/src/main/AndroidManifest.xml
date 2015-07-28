@@ -9,7 +9,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:uiOptions="splitActionBarWhenNarrow"
+            android:uiOptions="none"
 
             android:screenOrientation="portrait">
             <meta-data
