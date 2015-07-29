@@ -17,5 +17,9 @@
         android:showAsAction="always"
         tools:ignore="AppCompatResource"
         />
-
+<!--<item
+    android:title="One"
+    tools:ignore="AppCompatResource"
+    android:actionLayout="@layout/carticon"
+    android:showAsAction="always|withText"></item>-->
 </menu>
