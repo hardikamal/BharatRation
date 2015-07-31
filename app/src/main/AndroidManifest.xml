@@ -29,7 +29,6 @@
 
         </activity>
 
-
         <!-- Search results activity -->
         <activity android:name=".SearchResults"
             android:parentActivityName="com.ashinetech.bharatration.MainActivity" >

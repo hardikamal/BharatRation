@@ -20,12 +20,17 @@ import com.google.gson.Gson;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +57,6 @@ public class PaymentFragment extends Fragment
         s.setTotalAmount("3200");
         s.setExtOrderId("745547");
 
-
         Products products=new Products();
         products.setName("Spice");
         products.setUnitPrice(30);
@@ -62,9 +66,6 @@ public class PaymentFragment extends Fragment
         products1.setName("Pepper");
         products1.setUnitPrice(310);
         products1.setQuantity(6);
-
-
-
 
         Invoice invoice = new Invoice();
         invoice.setRecipientName("Harbhajan");
@@ -105,12 +106,8 @@ public class PaymentFragment extends Fragment
         s.setBuyer(buyer);
 
         Gson gson = new Gson();
-        String jsonRequest = gson.toJson(s).toString();
-
-
-        System.out.println("Values" + s) ;
-
-
+        String jsonRequest = gson.toJson(s);
+        System.out.println("Values" + s.toString()) ;
         new GetData(jsonRequest).execute();
         return  view;
     }
@@ -118,6 +115,7 @@ public class PaymentFragment extends Fragment
     private class GetData extends AsyncTask<String , String , String>
     {
         String jsonRequest;
+        String text;
         GetData(String jsonRequest)
         {
             this.jsonRequest = jsonRequest;
@@ -152,11 +150,11 @@ public class PaymentFragment extends Fragment
         }
 
         protected String doInBackground(String... arg0) {
-           /*mdata = RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest);
+        /*   mdata = RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest);
             System.out.println("URL"+RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest));
             System.out.println("DATA"+jsonRequest);
             System.out.println("RESS"+mdata);
-            return mdata;*/
+            return mdata;
              mdata = Constants.SERVICE_PAYU;
             HttpResponse jsonresponse = makeRequest(mdata,jsonRequest);
             final int statusCode = jsonresponse.getStatusLine().getStatusCode();
@@ -167,6 +165,64 @@ public class PaymentFragment extends Fragment
                 String res = EntityUtils.toString(entity);
                 System.out.println("EEE"+res);
                 return res;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+
+            */
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost(Constants.PAYMENT_URL);
+            httppost.setHeader("Content-type", "application/json");
+            httppost.setHeader("Accept", "application/json");
+
+
+
+            //mdata = RestfulService.source(Constants.PAYMENT_URL);
+            //httppost.setHeader("json",json.toString());
+            //httppost.getParams().setParameter("jsonpost",jsonRequest);
+            System.out.println("jreq"+jsonRequest);
+            try {
+                httppost.setEntity(new StringEntity(jsonRequest.toString(), "UTF-8"));
+                HttpResponse response = httpclient.execute(httppost);
+
+                // for JSON:
+                if(response != null)
+                {
+                    HttpEntity entity = response.getEntity();
+                    if(entity==null)
+                    {
+                     System.out.println("entity null");
+                    }
+                    InputStream is = entity.getContent();
+                    System.out.println("iii"+is.toString());
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    StringBuilder sb = new StringBuilder();
+
+                    String line = null;
+                    try {
+                        while (( reader.readLine()) != null) {
+                            line =reader.readLine();
+                            sb.append(line + "\n");
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            is.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    text = sb.toString();
+                    System.out.println("res"+text.toString());
+                }
+                else {
+                    System.out.println("im null");
+                }
+
+                return response.toString();
             } catch (IOException e) {
                 e.printStackTrace();
             }
