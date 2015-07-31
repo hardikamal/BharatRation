@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,14 @@ import com.google.gson.Gson;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONObject;
 
@@ -57,7 +61,7 @@ public class PaymentFragment extends Fragment
         s.setDescription("New order");
         s.setCurrencyCode("PLN");
         s.setTotalAmount("3200");
-        s.setExtOrderId("745547");
+        s.setExtOrderId("740025");
 
         Products products=new Products();
         products.setName("Spice");
@@ -162,7 +166,7 @@ public class PaymentFragment extends Fragment
              mdata = Constants.SERVICE_PAYU;
             return mdata;*/
             // mdata = Constants.SERVICE_PAYU;
-            HttpResponse jsonresponse = makeRequest(mdata,jsonRequest);
+        /*    HttpResponse jsonresponse = makeRequest(mdata,jsonRequest);
             final int statusCode = jsonresponse.getStatusLine().getStatusCode();
             System.out.println("RESS"+statusCode);
             System.out.println("REQ"+jsonRequest);
@@ -175,24 +179,42 @@ public class PaymentFragment extends Fragment
                 e.printStackTrace();
             }
             return null;
-
             */
+
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(Constants.PAYMENT_URL);
-            httppost.setHeader("Content-type", "application/json");
-            httppost.setHeader("Accept", "application/json");
+            JSONObject  jsonObject = null;
+            try
+            {
+                StringEntity s = new StringEntity("jsonpost="+jsonRequest.toString());
+                httppost.addHeader("content-type", "application/x-www-form-urlencoded");
+                httppost.setEntity(s);
+                HttpResponse response;
+                response = httpclient.execute(httppost);
+                String resFromServer = org.apache.http.util.EntityUtils.toString(response.getEntity());
+
+                jsonObject = new JSONObject(resFromServer);
+                Log.i("Response from server", jsonObject.toString());
+            } catch (Exception e) {	e.printStackTrace();}
+         //   httppost.setHeader("Content-type", "application/json");
+         //   httppost.setHeader("Accept", "application/json");
 
 
 
             //mdata = RestfulService.source(Constants.PAYMENT_URL);
             //httppost.setHeader("json",json.toString());
             //httppost.getParams().setParameter("jsonpost",jsonRequest);
-            System.out.println("jreq"+jsonRequest);
+         /*   System.out.println("jreq"+jsonRequest);
             try {
-                httppost.setEntity(new StringEntity(jsonRequest.toString(), "UTF-8"));
+                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                nameValuePairs.add(new BasicNameValuePair("jsonpost", jsonRequest.toString()));
+             //   httppost.setEntity(new StringEntity(jsonRequest.toString(), "UTF-8"));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
                 HttpResponse response = httpclient.execute(httppost);
 
-                // for JSON:
+                //System.out.println("Entity Utils"+EntityUtils.toString(response.getEntity()));
+
+
                 if(response != null)
                 {
                     HttpEntity entity = response.getEntity();
@@ -206,11 +228,19 @@ public class PaymentFragment extends Fragment
                     BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                     StringBuilder sb = new StringBuilder();
 
-                    String line = null;
+
                     try {
-                        while (( reader.readLine()) != null) {
-                            line =reader.readLine();
-                            sb.append(line + "\n");
+                        String line;
+                        if((line = reader.readLine()) != null)
+                        {
+                            while ((line = reader.readLine()) != null) {
+                                sb.append(line);
+                                System.out.println("SB"+sb.toString());
+                            }
+                        }
+                        else
+                        {
+                            System.out.println("no string");
                         }
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -222,7 +252,7 @@ public class PaymentFragment extends Fragment
                         }
                     }
                     text = sb.toString();
-                    System.out.println("res"+text.toString());
+                    System.out.println("res"+text);
                 }
                 else {
                     System.out.println("im null");
@@ -232,6 +262,7 @@ public class PaymentFragment extends Fragment
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            */
             return null;
 
         }
