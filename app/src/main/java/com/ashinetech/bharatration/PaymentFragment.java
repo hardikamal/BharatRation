@@ -33,7 +33,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Vignesh on 25-Jul-2015.
@@ -130,7 +132,7 @@ public class PaymentFragment extends Fragment
                 DefaultHttpClient client = new DefaultHttpClient();
                 HttpResponse httpResponse = client.execute(httpPost);
                 return httpResponse;
-               // return new DefaultHttpClient().execute(httpPost);
+               //  return new DefaultHttpClient().execute(httpPost);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (ClientProtocolException e) {
@@ -152,10 +154,14 @@ public class PaymentFragment extends Fragment
         protected String doInBackground(String... arg0) {
         /*   mdata = RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest);
             System.out.println("URL"+RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest));
+            mdata = RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest);
+         /*   System.out.println("URL"+RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest));
             System.out.println("DATA"+jsonRequest);
             System.out.println("RESS"+mdata);
             return mdata;
              mdata = Constants.SERVICE_PAYU;
+            return mdata;*/
+            // mdata = Constants.SERVICE_PAYU;
             HttpResponse jsonresponse = makeRequest(mdata,jsonRequest);
             final int statusCode = jsonresponse.getStatusLine().getStatusCode();
             System.out.println("RESS"+statusCode);
