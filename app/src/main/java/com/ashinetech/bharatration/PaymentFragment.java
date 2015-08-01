@@ -1,6 +1,10 @@
 package com.ashinetech.bharatration;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,6 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.ashinetech.bharatration.constants.Constants;
 import com.ashinetech.bharatration.model.Buyer;
@@ -48,11 +56,12 @@ public class PaymentFragment extends Fragment
 {
     String mdata;
     ProgressDialog progressDialog;
+    private WebView browser;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.cart,container, false);
-
         Purchase s =new Purchase();
         s.setNotifyUrl("http://localhost/PAYU/OrderNotify.php");
         s.setContinueUrl("http://localhost/PAYU/../../layout/success.php");
@@ -61,7 +70,7 @@ public class PaymentFragment extends Fragment
         s.setDescription("New order");
         s.setCurrencyCode("PLN");
         s.setTotalAmount("3200");
-        s.setExtOrderId("740025");
+        s.setExtOrderId("63");
 
         Products products=new Products();
         products.setName("Spice");
@@ -114,7 +123,9 @@ public class PaymentFragment extends Fragment
         Gson gson = new Gson();
         String jsonRequest = gson.toJson(s);
         System.out.println("Values" + s.toString()) ;
-        new GetData(jsonRequest).execute();
+        new GetData(jsonRequest,view).execute();
+
+
         return  view;
     }
 
@@ -122,9 +133,11 @@ public class PaymentFragment extends Fragment
     {
         String jsonRequest;
         String text;
-        GetData(String jsonRequest)
+        View view;
+        GetData(String jsonRequest,View view)
         {
             this.jsonRequest = jsonRequest;
+            this.view = view;
         }
 
         public HttpResponse makeRequest(String uri, String json) {
@@ -155,35 +168,13 @@ public class PaymentFragment extends Fragment
             progressDialog.show();
         }
 
-        protected String doInBackground(String... arg0) {
-        /*   mdata = RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest);
-            System.out.println("URL"+RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest));
-            mdata = RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest);
-         /*   System.out.println("URL"+RestfulService.source(Constants.PAYMENT_URL + "?purchase="+jsonRequest));
-            System.out.println("DATA"+jsonRequest);
-            System.out.println("RESS"+mdata);
-            return mdata;
-             mdata = Constants.SERVICE_PAYU;
-            return mdata;*/
-            // mdata = Constants.SERVICE_PAYU;
-        /*    HttpResponse jsonresponse = makeRequest(mdata,jsonRequest);
-            final int statusCode = jsonresponse.getStatusLine().getStatusCode();
-            System.out.println("RESS"+statusCode);
-            System.out.println("REQ"+jsonRequest);
-            HttpEntity entity = jsonresponse.getEntity();
-            try {
-                String res = EntityUtils.toString(entity);
-                System.out.println("EEE"+res);
-                return res;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-            */
-
+        @Override
+        protected String doInBackground(String... arg0)
+        {
             HttpClient httpclient = new DefaultHttpClient();
             HttpPost httppost = new HttpPost(Constants.PAYMENT_URL);
             JSONObject  jsonObject = null;
+            String test = "ddd";
             try
             {
                 StringEntity s = new StringEntity("jsonpost="+jsonRequest.toString());
@@ -194,86 +185,58 @@ public class PaymentFragment extends Fragment
                 String resFromServer = org.apache.http.util.EntityUtils.toString(response.getEntity());
 
                 jsonObject = new JSONObject(resFromServer);
-                Log.i("Response from server", jsonObject.toString());
-            } catch (Exception e) {	e.printStackTrace();}
-         //   httppost.setHeader("Content-type", "application/json");
-         //   httppost.setHeader("Accept", "application/json");
+                String status = jsonObject.getString("status");
+                String url = jsonObject.getString("url");
+              /*  System.out.println("URL"+url);
 
-
-
-            //mdata = RestfulService.source(Constants.PAYMENT_URL);
-            //httppost.setHeader("json",json.toString());
-            //httppost.getParams().setParameter("jsonpost",jsonRequest);
-         /*   System.out.println("jreq"+jsonRequest);
-            try {
-                ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-                nameValuePairs.add(new BasicNameValuePair("jsonpost", jsonRequest.toString()));
-             //   httppost.setEntity(new StringEntity(jsonRequest.toString(), "UTF-8"));
-                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-                HttpResponse response = httpclient.execute(httppost);
-
-                //System.out.println("Entity Utils"+EntityUtils.toString(response.getEntity()));
-
-
-                if(response != null)
+                if(status == "success")
                 {
-                    HttpEntity entity = response.getEntity();
-                    if(entity==null)
-                    {
-                     System.out.println("entity null");
-                    }
-                    InputStream is = entity.getContent();
-                    System.out.println("iii"+is.toString());
+                    url = jsonObject.getString("url");
+                    System.out.println("URL"+url);
 
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                    StringBuilder sb = new StringBuilder();
-
-
-                    try {
-                        String line;
-                        if((line = reader.readLine()) != null)
-                        {
-                            while ((line = reader.readLine()) != null) {
-                                sb.append(line);
-                                System.out.println("SB"+sb.toString());
-                            }
-                        }
-                        else
-                        {
-                            System.out.println("no string");
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        try {
-                            is.close();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    text = sb.toString();
-                    System.out.println("res"+text);
                 }
-                else {
-                    System.out.println("im null");
+                else
+                {
+                    url = "empty";
                 }
+                */
 
-                return response.toString();
-            } catch (IOException e) {
+                System.out.println("STATUS" + status);
+                Log.i("Response from server", jsonObject.toString());
+                return url;
+
+            }
+            catch (Exception e)
+            {
                 e.printStackTrace();
             }
-            */
-            return null;
+            return test;
 
         }
 
+        @Override
         protected void onPostExecute(String data)
         {
+            System.out.println("DATADATA"+data);
+
+
             if (progressDialog.isShowing())
             {
                 progressDialog.dismiss();
             }
 
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(data));
+            startActivity(browserIntent);
+
+        }
+    }
+
+    private class WebBrowser extends WebViewClient {
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
         }
     }
 
