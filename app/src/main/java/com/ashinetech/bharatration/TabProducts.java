@@ -19,13 +19,13 @@ public class TabProducts extends Fragment
         View view = inflater.inflate(R.layout.product_list_item,container, false);
 
         // Load the child fragment(TabFragment) into tabrealcontent(Frame Layout for loading entire tabs)
-      /*  FragmentManager childmanager = getChildFragmentManager();
+     /*   FragmentManager childmanager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = childmanager.beginTransaction();
         TabFragment tabFragment = new TabFragment();
         fragmentTransaction.add(R.id.tabrealcontent, tabFragment);
         fragmentTransaction.addToBackStack("T");
-        fragmentTransaction.commit();*/
-
+        fragmentTransaction.commit();
+    */
         TabFragment tabFragment = new TabFragment();
 
         FragmentManager fragmentManager = getFragmentManager();

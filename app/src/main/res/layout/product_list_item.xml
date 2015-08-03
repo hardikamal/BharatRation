@@ -80,13 +80,13 @@
                 android:id="@+id/product_brand"
                 android:paddingLeft="5dp"/>
 
-          <!--  <FrameLayout
+         <FrameLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:id="@+id/tabrealcontent">
 
-            </FrameLayout> -->
-
+            </FrameLayout> 
+<!--
             <android.support.v4.app.FragmentTabHost
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@android:id/tabhost"
@@ -111,7 +111,7 @@
                         android:layout_weight="1" />
                 </LinearLayout>
 
-            </android.support.v4.app.FragmentTabHost>
+            </android.support.v4.app.FragmentTabHost> -->
         </LinearLayout>
 
 

@@ -69,8 +69,8 @@ public class PaymentFragment extends Fragment
         s.setMerchantPosId("145227");
         s.setDescription("New order");
         s.setCurrencyCode("PLN");
-        s.setTotalAmount("3200");
-        s.setExtOrderId("63");
+        s.setTotalAmount("1873");
+        s.setExtOrderId("907");
 
         Products products=new Products();
         products.setName("Spice");
@@ -175,6 +175,7 @@ public class PaymentFragment extends Fragment
             HttpPost httppost = new HttpPost(Constants.PAYMENT_URL);
             JSONObject  jsonObject = null;
             String test = "ddd";
+
             try
             {
                 StringEntity s = new StringEntity("jsonpost="+jsonRequest.toString());
@@ -187,8 +188,8 @@ public class PaymentFragment extends Fragment
                 jsonObject = new JSONObject(resFromServer);
                 String status = jsonObject.getString("status");
                 String url = jsonObject.getString("url");
-              /*  System.out.println("URL"+url);
-
+                System.out.println("URL"+url);
+                /*
                 if(status == "success")
                 {
                     url = jsonObject.getString("url");
@@ -225,9 +226,10 @@ public class PaymentFragment extends Fragment
                 progressDialog.dismiss();
             }
 
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(data));
-            startActivity(browserIntent);
-
+           // Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(data));
+           // startActivity(browserIntent);
+            WebView myWebView = (WebView) view.findViewById(R.id.webview);
+            myWebView.loadUrl(data);
         }
     }
 

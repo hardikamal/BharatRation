@@ -74,8 +74,8 @@ public class Products extends Fragment
 
 
         // Test code to bind the data for tabs but didn't work
-/*
-        mTabHost = new FragmentTabHost(getActivity());
+
+     /*   mTabHost = new FragmentTabHost(getActivity());
         mTabHost = (FragmentTabHost)view.findViewById(android.R.id.tabhost);
         mTabHost.setup(getActivity(), getChildFragmentManager(), android.R.id.tabcontent);
 
@@ -83,7 +83,7 @@ public class Products extends Fragment
                 ProductQuantity.class, null);
         mTabHost.addTab(mTabHost.newTabSpec("fragmentc").setIndicator("Fragment C"),
                 ProductWeight.class, null);
-*/
+    */
 
 
         //This TabHost is used when this Product class is inherited from android.app.Fragment but now we have changed the
